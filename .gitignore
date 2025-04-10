@@ -1,0 +1,33 @@
+# Ignorar archivos y carpetas del sistema de Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*.bak
+*.swp
+.idea/
+.vscode/
+*.log
+
+# Ignorar carpetas de usuario y de sistema
+AppData/
+Cookies/
+Datos de programa/
+Entorno de red/
+Impresoras/
+Menú Inicio/
+Mis documentos/
+Plantillas/
+Reciente/
+SendTo/
+OneDrive/
+OpenVPN/
+MicrosoftEdgeBackups/
+Downloads/
+Favorites/
+Links/
+Music/
+Videos/
+
+# Archivos temporales
+*.dat
+*.log
