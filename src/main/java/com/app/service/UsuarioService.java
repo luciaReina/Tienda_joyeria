@@ -2,6 +2,7 @@ package com.app.service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,25 +24,27 @@ public class UsuarioService implements UserDetailsService {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepository.findByNombre(nombre); // corregido
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional <Usuario> usuario = usuarioRepository.findByUsername(username); 
 
-        if (usuario == null) {
-            throw new UsernameNotFoundException("Usuario no encontrado: " + nombre);
+        if (usuario.isEmpty()) {
+            throw new UsernameNotFoundException("Usuario no encontrado: " + username);
         }
+        
+        Usuario usuario1 = usuario.get();
 
         Set<GrantedAuthority> authoritySet = new HashSet<>();
-        authoritySet.add(new SimpleGrantedAuthority(usuario.getRol()));
+        authoritySet.add(new SimpleGrantedAuthority(usuario1.getRol()));
 
         return new org.springframework.security.core.userdetails.User(
-                usuario.getNombre(), // este es el username real usado en login
-                usuario.getPassword(),
+                usuario1.getUsername(), // este es el username real usado en login
+                usuario1.getPassword(),
                 authoritySet
         );
     }
 
-    public Usuario obtenerUsuarioPorNombre(String nombre) {
-        return usuarioRepository.findByNombre(nombre); // corregido
+    public Optional <Usuario> obtenerUsuarioPorNombre(String username) {
+        return usuarioRepository.findByUsername(username); 
     }
 
     public void guardarUsuario(Usuario usuario) {
@@ -56,6 +59,7 @@ public class UsuarioService implements UserDetailsService {
     }
 
     public List<Usuario> obtenerTodosLosUsuarios() {
+    	// Lógica para obtener todos los usuarios
         return usuarioRepository.findAll();
     }
 

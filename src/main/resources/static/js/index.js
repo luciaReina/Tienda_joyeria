@@ -33,5 +33,29 @@ document.addEventListener('DOMContentLoaded', function () {
         body.classList.toggle('no-scroll');
       });
     }
+	
+	/*llamada para que el usuario pueda entrar al perfil */
+	fetch("http://localhost:8080/usuario/perfil", { credentials: "include" })  
+	    .then(response => {
+	      if (!response.ok) {
+	        throw new Error("Usuario no autenticado");
+	      }
+	      return response.json();
+	    })
+	    .then(usuario => {
+	      // Usuario autenticado: cambiar ícono de usuario para ir al perfil
+	      const iconoUsuario = document.getElementById("iconoUsuario");
+	      if (iconoUsuario) {
+	        iconoUsuario.setAttribute("href", "/html/perfil.html");
+	      }
+
+	    })
+	    .catch(() => {
+	      // Usuario no autenticado: ícono lleva al login
+	      const iconoUsuario = document.getElementById("iconoUsuario");
+	      if (iconoUsuario) {
+	        iconoUsuario.setAttribute("href", "/html/login.html");
+	      }
+	    });
   });
   

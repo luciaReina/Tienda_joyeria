@@ -1,10 +1,12 @@
 package com.app.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.app.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-    Usuario findByNombre(String nombre); 
+    Optional <Usuario> findByUsername(String username); 
 }
 

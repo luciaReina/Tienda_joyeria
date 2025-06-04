@@ -4,13 +4,17 @@ document.addEventListener('DOMContentLoaded', function () {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const datos = {
-      nombre: document.getElementById('nombre').value,
-      apellido: document.getElementById('apellido').value,
-      email: document.getElementById('email').value,
-      telefono: document.getElementById('telefono').value,
-      password: document.getElementById('password').value
-    };
+	const datos = {
+	  username: document.getElementById('username').value,
+	  apellido: document.getElementById('apellido').value,
+	  email: document.getElementById('email').value,
+	  telefono: document.getElementById('telefono').value,
+	  password: document.getElementById('password').value,
+	  pais: document.getElementById('pais').value,
+	  ciudad: document.getElementById('ciudad').value,
+	  calle: document.getElementById('calle').value,
+	  codigoPostal: document.getElementById('codigoPostal').value
+	};
 	
 	console.log(datos);
 

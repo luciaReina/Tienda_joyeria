@@ -10,25 +10,29 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-
-	
 @Entity
 @Table(name="usuarios")
-public class Usuario implements Serializable{
+public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1313229735683120584L;
 
     private Integer idUsuario;
-    private String nombre;
+    private String username;
     private String apellido;
     private String email;
     private String password; 
     private String rol;
     private String telefono;
-    
+
+    // NUEVOS CAMPOS DE DIRECCIÓN
+    private String calle;
+    private String ciudad;
+    private String codigoPostal;
+    private String pais;
+
     public Usuario() {
     }
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_USUARIO", unique = true, nullable = false, precision = 9, scale = 0)
@@ -40,13 +44,13 @@ public class Usuario implements Serializable{
         this.idUsuario = idUsuario;
     }
 
-    @Column(name = "NOMBRE", nullable = false, length = 100)
-    public String getNombre() {
-        return nombre;
+    @Column(name = "USERNAME", nullable = false, length = 100)
+    public String getUsername() {
+        return username;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Column(name = "APELLIDO", nullable = false, length = 255)
@@ -66,7 +70,7 @@ public class Usuario implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     @Column(name = "PASSWORD", nullable = false)
     public String getPassword() {
         return password;
@@ -94,18 +98,54 @@ public class Usuario implements Serializable{
         this.telefono = telefono;
     }
 
+    // === CAMPOS DE DIRECCIÓN ===
+
+    @Column(name = "CALLE", nullable = false, length = 100)
+    public String getCalle() {
+        return calle;
+    }
+
+    public void setCalle(String calle) {
+        this.calle = calle;
+    }
+
+    @Column(name = "CIUDAD", nullable = false, length = 50)
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    @Column(name = "CODIGO_POSTAL", nullable = false, length = 10)
+    public String getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    public void setCodigoPostal(String codigoPostal) {
+        this.codigoPostal = codigoPostal;
+    }
+
+    @Column(name = "PAIS", nullable = false, length = 50)
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+
     @Override
     public int hashCode() {
-        return Objects.hash( rol, 
-                apellido, email, nombre, telefono, idUsuario);
+        return Objects.hash(rol, apellido, email, username, telefono, idUsuario);
     }
-    
+
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof Usuario))
-            return false;
+        if (this == obj) return true;
+        if (!(obj instanceof Usuario)) return false;
         Usuario other = (Usuario) obj;
         return Objects.equals(idUsuario, other.idUsuario);
     }

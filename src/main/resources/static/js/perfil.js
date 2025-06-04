@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("/usuario/perfil")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Usuario no autenticado");
-      }
-      return response.json();
-    })
+	fetch("/usuario/perfil", { credentials: "include" })
+	    .then(response => {
+	      if (!response.ok) {
+	        throw new Error("Usuario no autenticado");
+	      }
+	      return response.json();
+	    })
     .then(usuario => {
-      document.getElementById("nombre").textContent = usuario.nombre + " " + usuario.apellido;
+      document.getElementById("username").textContent = usuario.username + " " + usuario.apellido;
       document.getElementById("email").textContent = usuario.email;
       document.getElementById("telefono").textContent = usuario.telefono || "No definido";
       document.getElementById("direccion").textContent = usuario.direccion || "No definida";
