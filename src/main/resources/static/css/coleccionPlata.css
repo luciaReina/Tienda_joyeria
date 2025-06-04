@@ -1,0 +1,469 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Playfair Display', serif;
+    overflow-x: hidden;
+  }
+  
+  /* Contenedor principal del menú */
+  .menu-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
+  
+  /* Estilos para el header */
+  header.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #2E0E46;
+    border-bottom: none;
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+    position: relative; /* Asegura que el header esté en su lugar */
+    z-index: 999;
+  }
+  
+  .menu-title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: white;
+    font-family: 'Playfair Display', serif;
+    margin-top: 20px;
+  }
+  
+  .menu-icons {
+    display: flex;
+    gap: 15px;
+    color: white;
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+  
+  .menu-icons svg:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+    color: white;
+  }
+  
+  .menu-icons a {
+    display: inline-block;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  /* Estilo de los iconos en el header */
+  .icon-tres {
+    display: none; /* Oculto por defecto */
+  }
+  
+  .icon-lupa, .icon-location {
+    display: inline-block;
+  }
+  
+  /* Para que quite la decoración del título del menú + que se agranden */
+  a {
+    text-decoration: none !important;
+  }
+  
+  a:hover {
+    text-decoration: none !important; /* Asegura que no haya subrayado */
+  }
+  
+  a:hover .menu-title {
+    transform: scale(1.1); 
+    transition: transform 0.3s ease; 
+    fill: inherit; 
+  }
+  
+/* Estilo del contenedor que contiene las líneas y el índice */
+  .menu-container {
+    font-family: 'Playfair Display', serif;
+    background-color: #2E0E46;
+    margin: 0;
+    margin-top: -10px;
+    width: 100%;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Líneas separadoras */
+  .lineas {
+    background-color: #2E0E46;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: -10px;
+  }
+  
+  .linea1 hr {
+    width: 47%;
+    text-align: left;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 1px solid #DDB440;
+  }
+  
+  .linea2 hr {
+    width: 47%;
+    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 1px solid #DDB440;
+  }
+  
+  /* Icono de la corona */
+  .corona {
+    text-align: center;
+    align-items: center;
+    fill: #2E0E46;
+    color: #DDB440; 
+  }
+  
+  /* Estilos del menú de navegación */
+  nav.menu-nav {
+    background-color: #2E0E46;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  nav.menu-nav ul {
+    list-style: none;
+    padding: 35px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 170px; 
+  }
+  
+  nav.menu-nav a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  nav.menu-nav a:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+  }
+
+/*Portada*/  
+.portada {
+  background-image: url('/img/portada4.png');
+  background-position: center;
+  background-size: cover;
+  padding: 230px 20px;
+  height: 100%;
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+/*diseño lineas*/
+.linea hr {
+  margin-top: 20px;
+  width:30%;
+  border: 1px solid #DDB440; 
+  margin-bottom: 20px;
+}
+
+/*contenido*/
+.contenido {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+}
+
+.contenido h3 {
+  font-size: 40px;
+}
+
+.contenido P {
+  font-size: 16px;
+}
+
+/* Colección de joyas */
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.grid-container > div {
+  text-align: center;
+  padding: 10px;
+  font-size: 30px;
+  position: relative; 
+  display: inline-block; 
+  overflow: visible; 
+}
+
+.grid-container .descripcion {
+  opacity: 0;
+  transition: opacity 0.3s, bottom 0.3s;
+  position: absolute;
+  bottom: -35px; 
+  left: 0;
+  width: 100%; 
+  font-size: 16px;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 5px 0;
+  text-align: center;
+  pointer-events: none; /* No interactúa con el raton */
+}
+
+.grid-container > div:hover .descripcion {
+  opacity: 1;
+  bottom: 0; 
+}
+
+.grid-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+  box-shadow: 0 4px 8px rgba(238, 238, 238, 0.5);
+  cursor: pointer;
+}
+
+.grid-container img:hover {
+  transform: scale(1.1);
+  z-index: 10; 
+}
+
+/* Estilo para el ítem grande */
+.item1 {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+
+.grid-container > div:not(.item1) {
+  aspect-ratio: 1 / 1;
+  overflow: visible;
+}
+
+/* acerca coleccion plata */
+.joyas {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin-top: 100px;
+  color: black;
+  flex-wrap: wrap;
+}
+
+.grid-container2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+}
+
+.grid-terciario, .grid-secundario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.grid-secundario img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  max-width: 100%;
+}
+
+.boton2 {
+  display: inline-block;
+  padding: 10px 40px;
+  color:#DDB440;
+  text-decoration: none;
+  border: 1px solid #DDB440;
+  position: relative; 
+}
+
+.boton2:hover {
+  color:#DDB440; 
+}
+
+/*PIE DE PAGINA*/
+.footer {
+  background-color: #2E0E46; 
+  color: white;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 100px; 
+}
+
+.footer-column {
+  text-align: center;
+}
+
+.footer-column h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 5px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.social-icons svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+  cursor: pointer;
+}
+
+/* Menu fijo en la parte superior en el escritorio*/
+@media (min-width: 901px) {
+  header.menu {
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que se mantenga encima de otros elemento*/
+  }
+
+  .menu-container {
+    display: block;
+  }
+
+  .menu-movil {
+    display: none;
+  }  
+}
+
+/* Media query para móviles */
+@media (max-width: 900px) {
+
+  .icon-tres {
+    display: inline-block;  
+  }
+  .icon-location, .menu-container {
+    display: none;   
+  }
+
+  header.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que se mantenga encima de otros elementos */
+  }
+
+  .portada {
+    margin-top: 90px;
+  }
+
+   /* Estilo del menú móvil */
+   .menu-movil {
+    display: none; /* Ocultar el menú por defecto */
+    position: fixed; /* Fijo en la pantalla */
+    top: 100px; /* Aseguramos que esté justo debajo del header */
+    left: 0;
+    width: 100%;
+    height:100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    max-height: 100vh; /* Evita que el menú se desborde al hacer scroll */
+    overflow-y: auto; /* Si el contenido es largo, se puede hacer scroll dentro del menú */
+  }
+
+  .menu-movil ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-movil ul li {
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .menu-movil ul li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    display: block;
+  }
+
+  .menu-movil.show {
+    display: block; 
+  }
+
+  /* Bloquear el scroll cuando el menú está abierto */
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+  .footer {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr;
+    padding: 0 8px; 
+  }
+
+}
+
+/* Media query para pantallas muy pequeñas (por debajo de 600px) */
+@media (max-width: 600px) {
+  .menu-title {
+    font-size: 24px; 
+  }
+
+  .portada {
+    margin-top: 80px;
+  }
+
+    /* Estilo del menú móvil */
+   .menu-movil {
+    top: 80px; 
+  }
+
+  .footer {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr;
+    padding: 0 8px; 
+  }
+
+}

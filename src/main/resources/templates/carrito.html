@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="stylesheet" href="/css/carrito.css">
+</head>
+<body>
+  <div class="cabecera">IVI REINA</div>
+
+  <div class="progreso">
+    <span class="activo">Cesta</span> > <span>Envío y pago</span> > <span>Confirmación</span>
+  </div>
+
+  <div class="carrito">
+    <p>Tiene <strong th:text="${carrito.size()}"></strong> artículo(s) en su cesta.</p>
+
+    <div th:each="pedido : ${carrito}">
+      <div class="producto">
+        <img src="/images/joya.jpg" alt="Joya">
+        <div class="info">
+          <h3 th:text="${pedido.producto.ds_nombre}"></h3>
+          <p th:text="${pedido.producto.ds_description}"></p>
+          <p><strong th:text="${pedido.producto.nm_precio} + '€'"></strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="resumen">
+      <p>SUBTOTAL: <span th:text="${subtotal} + '€'"></span></p>
+      <p>GASTOS DE ENVÍO: 3.99€</p>
+      <p>TOTAL: <strong th:text="${total} + '€'"></strong></p>
+    </div>
+
+    <button>REALIZAR PEDIDO</button>
+  </div>
+
+  <script src="/js/carrito.js"></script>
+</body>
+</html>

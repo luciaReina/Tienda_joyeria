@@ -1,0 +1,728 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Playfair Display', serif;
+  overflow-x: hidden;
+}
+
+/* Contenedor principal del menú */
+.menu-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+/* Estilos para el header */
+header.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #2E0E46;
+  border-bottom: none;
+  font-family: 'Playfair Display', serif;
+  margin: 0;
+  position: relative; /* Asegura que el header esté en su lugar */
+  z-index: 999;
+}
+
+.menu-title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: white;
+  font-family: 'Playfair Display', serif;
+  margin-top: 20px;
+}
+
+.menu-icons {
+  display: flex;
+  gap: 15px;
+  color: white;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.menu-icons svg:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+  color:white;
+}
+
+.menu-icons a {
+  display: inline-block;
+  color: white;
+  font-size: 24px;
+  text-align: center;
+}
+
+/* Estilo de los iconos en el header */
+.icon-tres {
+  display: none; /* Oculto por defecto */
+}
+
+.icon-lupa, .icon-location {
+  display: inline-block;
+}
+
+/* Para que quite la decoración del título del menú + que se agranden */
+a {
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: none !important; /* Asegura que no haya subrayado */
+}
+
+a:hover .menu-title {
+  transform: scale(1.1); 
+  transition: transform 0.3s ease; 
+  fill: inherit; 
+}
+
+/* Estilo del contenedor que contiene las líneas y el índice */
+.menu-container {
+  font-family: 'Playfair Display', serif;
+  background-color: #2E0E46;
+  margin: 0;
+  margin-top: -10px;
+  width: 100%;
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Líneas separadoras */
+.lineas {
+  background-color: #2E0E46;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: -10px;
+}
+
+.linea1 hr {
+  width: 47%;
+  text-align: left;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: 1px solid #DDB440;
+}
+
+.linea2 hr {
+  width: 47%;
+  text-align: right;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: 1px solid #DDB440;
+}
+
+/* Icono de la corona */
+.corona {
+  text-align: center;
+  align-items: center;
+  fill: #2E0E46;
+  color: #DDB440; 
+}
+
+/* Estilos del menú de navegación */
+nav.menu-nav {
+  background-color: #2E0E46;
+  text-align: center;
+  margin-top: 20px;
+}
+
+nav.menu-nav ul {
+  list-style: none;
+  padding: 35px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  gap: 170px; 
+}
+
+nav.menu-nav a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+}
+
+nav.menu-nav a:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+/*para ir atras*/
+
+.atras h4{
+  color: #2c1e3f;
+  margin-top: 230px;
+  margin-left: 30px;
+}
+
+.atras a:hover{
+  color:#2c1e3f;
+}
+
+/* Producto detallado */
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px; /* Espacio entre la columna de imágenes y la columna de texto */
+  margin-top: 10px;
+  margin-bottom: 80px;
+}
+
+/* Lado izquierdo: Grid de imágenes */
+.left-side {
+  flex: 2; /* Reducir el tamaño del lado izquierdo para que ocupe menos espacio */
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;  /* Dos columnas con igual tamaño */
+  gap: 10px; /* Ajustar el espacio entre las imágenes */
+  padding: 25px; /* Reducir padding para un grid más compacto */
+}
+
+.grid-container img {
+  object-fit: cover;
+  height: 270px; /* Reducir la altura de las imágenes */
+  width: 100%;
+  cursor: pointer;
+}
+
+.item1 {
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.item1 img {
+  height: 100%;
+}
+
+/* Lado derecho: Información del producto */
+.right-side {
+  flex: 1;
+  margin-top: 80px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #2c1e3f; 
+}
+ 
+.titulo {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+ 
+.material {
+  font-size: 16px;
+  color: #b29aca;
+  margin-bottom: 15px;
+}
+ 
+.descripcion {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+ 
+.precio {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 15px;
+}
+ 
+.color_opcion {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+ 
+.color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+ 
+.blue { background-color: #1e3a8a; }
+.green { background-color: #166534; }
+.brown { background-color: #7b341e; }
+
+/* Estilo para el color seleccionado */
+.color.selected {
+  border: 3px solid #2c1e3f;  
+  box-shadow: 0 0 5px #2c1e3f; 
+}
+ 
+.cesta {
+  background-color: #3d1a63;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+ 
+.cesta:hover {
+  background-color: #4c2676;
+}
+ 
+/*producto relacionados*/
+.recomendaciones {
+  margin-top: 70px;
+  color: #2c1e3f;
+  font-size: 18px;
+  font-family: 'Segoe UI', sans-serif;
+  margin-bottom: 80px;
+}
+
+.recomendaciones h3{
+  margin-bottom: 40px;
+  margin-left: 30px;
+}
+
+.recomendaciones_grid {
+    display: flex;
+    margin-left: 30px;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.cartilla img {
+    width: 270px;
+    height: 270px;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.cartilla h4 { 
+  font-size: 22px;
+}
+
+/* Para pantallas pequeñas (móvil) las piezas*/
+.producto-movil {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.carrousel {
+  position: relative; 
+  width: 620px;
+  height: 620px;
+  display: flex; 
+  overflow: hidden;
+  opacity: 1; 
+  pointer-events: auto;
+  transition: opacity 0.8s ease;
+  background-color: #000; 
+}
+
+/* Imágenes dentro del carrusel */
+.carrousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block; 
+  flex-shrink: 0; 
+}
+
+/* Flechas */
+.flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(84, 62, 97, 0.829);
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 20;
+  border-radius: 50%;
+  user-select: none;
+}
+
+.flecha.izquierda {
+  left: 10px;
+}
+
+.flecha.derecha {
+  right: 10px;
+}
+
+/* Ocultar flechas por defecto */
+.carrousel .flecha {
+  opacity: 0;
+  pointer-events: none; /* Para que no sean clicables cuando estén ocultas */
+  transition: opacity 0.3s ease;
+}
+
+/* Mostrar flechas cuando el cursor esté sobre el carrusel */
+.carrousel:hover .flecha {
+  opacity: 1;
+  pointer-events: auto; /* Hacerlas clicables */
+}
+
+/*PIE DE PAGINA*/
+.footer {
+  background-color: #2E0E46; 
+  color: white;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 100px; 
+}
+
+.footer-column {
+  text-align: center;
+}
+
+.footer-column h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 5px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.social-icons svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+  cursor: pointer;
+}
+
+/* Menu fijo en la parte superior en el escritorio*/
+@media (min-width: 901px) {
+  header.menu {
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que se mantenga encima de otros elemento*/
+  }
+
+  .menu-container {
+    display: block;
+  }
+
+  .menu-movil {
+    display: none;
+  }
+  
+  .producto-movil{
+    display: none;
+  }
+
+}
+
+/* Media query para móviles */
+@media (max-width: 900px) {
+
+  .boton {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .icon-tres {
+    display: inline-block;  
+  }
+  .icon-location, .menu-container {
+    display: none;   
+  }
+
+  header.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que se mantenga encima de otros elementos */
+  }
+
+   /* Estilo del menú móvil */
+   .menu-movil {
+    display: none; /* Ocultar el menú por defecto */
+    position: fixed; /* Fijo en la pantalla */
+    top: 100px; /* Aseguramos que esté justo debajo del header */
+    left: 0;
+    width: 100%;
+    height:100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    max-height: 100vh; /* Evita que el menú se desborde al hacer scroll */
+    overflow-y: auto; /* Si el contenido es largo, se puede hacer scroll dentro del menú */
+  }
+
+  .menu-movil ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-movil ul li {
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .menu-movil ul li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    display: block;
+  }
+
+  .menu-movil.show {
+    display: block; 
+  }
+
+  /* Bloquear el scroll cuando el menú está abierto */
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+  .footer {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .left-side {
+    display:none;
+  }
+
+  .producto-movil {
+    justify-content: center;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .producto-imagen {
+    width: 610px;
+    height: 610px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .right-side {
+    margin-top: -10px;
+    margin-left: 30px;
+  }
+
+  /*producto relacionados para moviles*/
+  .recomendaciones {
+    margin-top: 70px;
+    color: #2c1e3f;
+    font-size: 16px;
+    font-family: 'Segoe UI', sans-serif;
+    margin-bottom: 80px;
+  }
+
+  .recomendaciones h3{
+    margin-bottom: 40px;
+    margin-left: 30px;
+  }
+
+  .recomendaciones_grid {
+      display: flex;
+      margin-left: 30px;
+      gap: 40px;
+      flex-wrap: wrap;
+  }
+
+  .cartilla img {
+      width: 250px;
+      height: 250px;
+      margin-bottom: 0;
+      cursor: pointer;
+  }
+
+  .cartilla h4 { 
+    font-size: 18px;
+  }
+
+  .atras h4{
+    color: #2c1e3f;
+    margin-top: 120px;
+    margin-left: 13px;
+  }
+
+}
+
+/* Media query para pantallas muy pequeñas (por debajo de 600px) */
+@media (max-width: 600px) {
+  .menu-title {
+    font-size: 24px; 
+  }
+
+  .flex-container {
+    margin-top: 210px;
+  }
+
+    /* Estilo del menú móvil */
+  .menu-movil {
+    display: none; /* Ocultar el menú por defecto */
+    position: fixed; /* Fijo en la pantalla */
+    top: 80px; /* Aseguramos que esté justo debajo del header */
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    max-height: 100vh; /* Evita que el menú se desborde al hacer scroll */
+    overflow-y: auto; /* Si el contenido es largo, se puede hacer scroll dentro del menú */
+  }
+
+  .footer {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .carrousel {
+    position: relative; 
+    width: 480px;
+    height: 480px;
+    display: flex; 
+    overflow: hidden;
+    opacity: 1; 
+    pointer-events: auto;
+    transition: opacity 0.8s ease;
+    background-color: #000; 
+  }
+
+  /*producto relacionados para moviles*/
+  .recomendaciones {
+    margin-top: 70px;
+    color: #2c1e3f;
+    font-size: 14px;
+    font-family: 'Segoe UI', sans-serif;
+    margin-bottom: 80px;
+  }
+
+  .cartilla img {
+      width: 190px;
+      height: 190px;
+      margin-bottom: 0;
+      cursor: pointer;
+  }
+
+  .cartilla h4 { 
+    font-size: 16px;
+  }
+
+  .right-side {
+    margin-top: -190px;
+    margin-left: 30px;
+  }
+
+  .atras h4{
+    color: #2c1e3f;
+    margin-top: 100px;
+    margin-left: 13px;
+  }
+
+}
+
+@media (min-width: 1300px) {
+    
+  /* Producto detallado */
+  .flex-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px; /* Espacio entre la columna de imágenes y la columna de texto */
+    margin-top: 10px;
+    margin-bottom: 80px;
+  }
+
+  .grid-container img {
+    object-fit: cover;
+    height: 400px; /* Reducir la altura de las imágenes */
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .item1 img {
+    height: 100%;
+  }
+
+  /* Lado derecho: Información del producto */
+  .right-side {
+    flex: 1;
+    margin-top: 250px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #2c1e3f; 
+  }
+
+  /*producto relacionados para pantallas grandes*/
+  .recomendaciones {
+    margin-top: 70px;
+    color: #2c1e3f;
+    font-size: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    margin-bottom: 80px;
+  }
+
+  .recomendaciones h3{
+    margin-bottom: 40px;
+    margin-left: 30px;
+  }
+
+  .recomendaciones_grid {
+      display: flex;
+      margin-left: 30px;
+      gap: 40px;
+      flex-wrap: wrap;
+  }
+
+  .cartilla img {
+      width: 425px;
+      height: 425px;
+      margin-bottom: 0;
+      cursor: pointer;
+  }
+
+  .cartilla h4 { 
+    font-size: 22px;
+  }
+
+  .atras h4{
+    color: #2c1e3f;
+    margin-top: 250px;
+    margin-left: 25px;
+    font-size: 20px;
+  }
+
+  
+
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coleccion Plata</title>
+    
+	<link rel="stylesheet" href="/css/local.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <script src="/js/index.js" defer></script>
+  <script src="/js/local.js" defer></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<!-- Contenedor principal del menú -->
+<div class="menu-wrapper">
+    <!--header-->
+    <header class="menu">
+      <div class="menu-icons">
+        <svg class="icon-tres" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fff" d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h16q.425 0 .713.288T21 17t-.288.713T20 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z"/></svg>
+            <a href="/html/busqueda.html">
+                <svg class="icon-lupa" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fff" d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14"/></svg>
+            </a>
+            <a href="/html/local.html">
+                <svg class="icon-location" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8"/></g></svg>
+            </a>
+      </div>
+      <a href="/html/colecciones.html">
+        <h1 class="menu-title">IVI REINA</h1>
+      </a>
+      <div class="menu-icons">
+        <a href="/html/login.html">
+            <svg class="icon-user" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></g></svg>
+          </a>
+          <a href="/html/carrito.html"">
+            <svg  class="icon-bag" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M6.45 9.23h11.1a1.85 1.85 0 0 1 1.85 1.85v6.472a3.7 3.7 0 0 1-3.7 3.698H8.3a3.7 3.7 0 0 1-3.7-3.698V11.08a1.85 1.85 0 0 1 1.85-1.85"/><path d="M16.625 11.553V7.381a4.62 4.62 0 0 0-2.852-4.278a4.627 4.627 0 0 0-6.398 4.278v4.172"/></g></svg>
+          </a>
+     </div>
+    </header>
+  
+    <!-- Contenedor para las líneas separadoras y el menú -->
+    <div class="menu-container">
+        <!--linea separadora-->
+        <div class="lineas">
+            <div class="linea1">
+                <hr>
+            </div>
+            <div class="corona">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M5 20v-2h14v2zm0-3.5L3.725 8.475q-.05 0-.113.013T3.5 8.5q-.625 0-1.062-.438T2 7t.438-1.062T3.5 5.5t1.063.438T5 7q0 .175-.038.325t-.087.275L8 9l3.125-4.275q-.275-.2-.45-.525t-.175-.7q0-.625.438-1.063T12 2t1.063.438T13.5 3.5q0 .375-.175.7t-.45.525L16 9l3.125-1.4q-.05-.125-.088-.275T19 7q0-.625.438-1.063T20.5 5.5t1.063.438T22 7t-.437 1.063T20.5 8.5q-.05 0-.112-.012t-.113-.013L19 16.5zm1.7-2h10.6l.65-4.175l-2.625 1.15L12 6.9l-3.325 4.575l-2.625-1.15zm5.3 0"/></svg>
+            </div>
+            <div class="linea2">
+                <hr>
+            </div>
+        </div>
+    
+        <!--Indice-->
+        <nav class="menu-nav">
+          <ul>
+              <li><a href="/html/index.html">THE HOUSE</a></li>
+              <li><a href="/html/productos.html">HIGH JEWELRY</a></li>
+              <li><a href="/html/colecciones.html">FINE JEWELRY</a></li>
+              <li><a href="/html/services.html">SERVICES</a></li>
+          </ul>
+        </nav>
+     </div>
+</div>
+
+<!-- Menú desplegable movil-->
+<div id="menuMovil" class="menu-movil">
+  <ul>
+      <li><a href="/html/index.html">THE HOUSE</a></li>
+      <li><a href="/html/productos.html">HIGH JEWELRY</a></li>
+      <li><a href="/html/colecciones.html">FINE JEWELRY</a></li>
+      <li><a href="/html/services.html">SERVICES</a></li>
+  </ul>
+</div>
+
+<!-- Ir para atras-->
+<section class="atras">
+  <a href="/html/index.html">
+    <h4>← Atrás</h4>
+  </a>
+</section>
+
+<!--encuentra tu tienda-->
+<section class="local">
+  <h1>ENCUENTRA TU TIENDA</h1>
+  <div class="contenedor">
+    <!-- Tarjeta izquierda-->
+    <div class="panel-info">
+      <div class="icono-mapa-contenedor">
+        <h3>IVI REINA MÁLAGA</h3>
+        <div id="icono-mapa" class="icono-mapa">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16.22 2.663a1.47 1.47 0 0 0-1.09 0L8.87 5.167c-.35.14-.74.14-1.09 0L1.982 2.848a.735.735 0 0 0-1.008.686V17.62c0 .601.366 1.142.924 1.365l5.88 2.352c.35.14.741.14 1.092 0l6.258-2.504c.35-.14.741-.14 1.092 0l5.796 2.315a.735.735 0 0 0 1.008-.686V6.38a1.47 1.47 0 0 0-.924-1.365zM8.325 5.272v16.17m7.35-18.884v16.17"/></svg>
+        </div>
+      </div>
+      <p><strong>Tienda oficial</strong></p>
+      <p>Calle Larios, 1<br>Málaga 29015</p>
+
+      <!-- Contenedor del icono y teléfono -->
+      <div class="telefono-contenedor">
+        <div class="icono-telefono">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="#2E0E46" d="M19.5 22a1.5 1.5 0 0 0 1.5-1.5V17a1.5 1.5 0 0 0-1.5-1.5c-1.17 0-2.32-.18-3.42-.55a1.51 1.51 0 0 0-1.52.37l-1.44 1.44a14.77 14.77 0 0 1-5.89-5.89l1.43-1.43c.41-.39.56-.97.38-1.53c-.36-1.09-.54-2.24-.54-3.41A1.5 1.5 0 0 0 7 3H3.5A1.5 1.5 0 0 0 2 4.5C2 14.15 9.85 22 19.5 22M3.5 4H7a.5.5 0 0 1 .5.5c0 1.28.2 2.53.59 3.72c.05.14.04.34-.12.5L6 10.68c1.65 3.23 4.07 5.65 7.31 7.32l1.95-1.97c.14-.14.33-.18.51-.13c1.2.4 2.45.6 3.73.6a.5.5 0 0 1 .5.5v3.5a.5.5 0 0 1-.5.5C10.4 21 3 13.6 3 4.5a.5.5 0 0 1 .5-.5"/>
+          </svg>
+        </div>
+        <p class="telefono-texto">952123456</p>
+      </div>
+ 
+      <div class="cartilla-detalles"> 
+        <div class="botones">
+          <button id="boton-detalles">Detalles tienda</button>
+        </div>
+      </div>
+
+        <!-- Detalles adicionales ocultos por defecto -->
+        <div id="detalles-tienda" class="detalles-tienda oculto">
+          <h4><strong>Horarios de atención</strong></h4>
+          <ul>
+            <li>Lunes: 9:00 - 15:00 </li>
+            <li>Martes: 9:00 - 15:00 </li>
+            <li>Miércoles: 9:00 - 15:00 </li>
+            <li>Jueves: 9:00 - 15:00 </li>
+            <li>Viernes: 9:00 - 15:00 </li>
+            <li>Sábados: 9:00 - 15:00</li>
+            <li>Domingos: Cerrado</li>
+          </ul>
+        </div>
+    </div> 
+
+    <!-- Mapa derecha (siempre visible) -->
+    <div class="mapa-contenedor" id="mapaContenedor">
+      <div class="cabecera">
+        <h3 class="mapa-texto">IVI REINA MÁLAGA</h3>
+        <button class="cerrar">Cerrar </button>
+      </div>
+      <div id="mapa"></div>
+    </div>
+  </div>
+</section>>
+
+<!--pie de pagina-->
+<footer class="footer">
+  <div class="footer-column">
+      <h4>CUSTOMER SERVICE</h4>
+      <ul>
+          <li>Contact us</li>
+          <li>Book an appointment</li>
+          <li>Frequently Asked Questions</li>
+          <li>Shipping & Returns</li>
+          <li>Store information</li>
+      </ul>
+  </div>
+  <div class="footer-column">
+      <h4>LEGAL NOTICE</h4>
+      <ul>
+          <li>Privacy policy</li>
+          <li>Terms of use</li>
+          <li>Sales terms</li>
+      </ul>
+  </div>
+  <div class="footer-column">
+      <h4>FOLLOW US</h4>
+      <div class="social-icons">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M16 21.75A5.75 5.75 0 0 0 21.75 16V8A5.75 5.75 0 0 0 16 2.25H8A5.75 5.75 0 0 0 2.25 8v8A5.75 5.75 0 0 0 8 21.75zM13.711 5.763A.75.75 0 0 0 12.25 6v9A2.25 2.25 0 1 1 10 12.75a.75.75 0 0 0 0-1.5A3.75 3.75 0 1 0 13.75 15V8.458c.767.712 1.847 1.292 3.25 1.292a.75.75 0 0 0 0-1.5c-.972 0-1.711-.4-2.259-.919c-.56-.532-.898-1.173-1.03-1.568" clip-rule="evenodd"/></svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4zm9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3"/></svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95"/></svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"><g fill="none"><g clip-path="url(#primeTwitter0)"><path fill="currentColor" d="M11.025.656h2.147L8.482 6.03L14 13.344H9.68L6.294 8.909l-3.87 4.435H.275l5.016-5.75L0 .657h4.43L7.486 4.71zm-.755 11.4h1.19L3.78 1.877H2.504z"/></g><defs><clipPath id="primeTwitter0"><path fill="#fff" d="M0 0h14v14H0z"/></clipPath></defs></g></svg> 
+      </div>
+  </div>
+</footer>
+
+</body>
+</html>
