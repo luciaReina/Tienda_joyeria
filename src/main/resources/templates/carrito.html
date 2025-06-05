@@ -1,38 +1,41 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <link rel="stylesheet" href="/css/carrito.css">
-</head>
-<body>
-  <div class="cabecera">IVI REINA</div>
+<div class="carrito-container">
+    <h2>IVI REINA</h2>
+    <div class="progreso">
+        <span class="activo">Cesta</span> → <span>Envío & pago</span> → <span>Confirmación</span>
+    </div>
 
-  <div class="progreso">
-    <span class="activo">Cesta</span> > <span>Envío y pago</span> > <span>Confirmación</span>
-  </div>
+    <div th:if="${carrito == null or #lists.isEmpty(carrito)}" class="carrito-vacio">
+        Tu cesta de la compra está vacía.
+    </div>
 
-  <div class="carrito">
-    <p>Tiene <strong th:text="${carrito.size()}"></strong> artículo(s) en su cesta.</p>
-
-    <div th:each="pedido : ${carrito}">
-      <div class="producto">
-        <img src="/images/joya.jpg" alt="Joya">
-        <div class="info">
-          <h3 th:text="${pedido.producto.ds_nombre}"></h3>
-          <p th:text="${pedido.producto.ds_description}"></p>
-          <p><strong th:text="${pedido.producto.nm_precio} + '€'"></strong></p>
+    <div th:if="${carrito != null and !#lists.isEmpty(carrito)}" class="carrito-contenido">
+        <div class="item" th:each="producto : ${carrito}">
+            <img th:src="@{/images/{img}(img=${producto.imagen})}" alt="Producto"/>
+            <div>
+                <h3 th:text="${producto.nombre}"></h3>
+                <p>Ref: <span th:text="${producto.referencia}"></span></p>
+                <p><strong th:text="${producto.precio + '€'}"></strong></p>
+                <div class="cantidad">
+                    <button th:onclick="'decrementar(' + ${producto.id} + ')'">-</button>
+                    <span>1</span>
+                    <button th:onclick="'incrementar(' + ${producto.id} + ')'">+</button>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="totales">
+            <p>SUBTOTAL: 
+                <span th:text="${#numbers.formatDecimal(carrito.?sum(p -> p.precio), 1, 'POINT', 2, 'POINT')} + '€'"></span>
+            </p>
+            <p>GASTOS DE ENVÍO: <span>3.99€</span></p>
+            <p><strong>
+                TOTAL: 
+                <span th:text="${#numbers.formatDecimal(carrito.?sum(p -> p.precio) + 3.99, 1, 'POINT', 2, 'POINT')} + '€'"></span>
+            </strong></p>
+        </div>
+
+        <form method="post" th:action="@{/realizar-pedido}">
+            <button type="submit">REALIZAR PEDIDO</button>
+        </form>
     </div>
-
-    <div class="resumen">
-      <p>SUBTOTAL: <span th:text="${subtotal} + '€'"></span></p>
-      <p>GASTOS DE ENVÍO: 3.99€</p>
-      <p>TOTAL: <strong th:text="${total} + '€'"></strong></p>
-    </div>
-
-    <button>REALIZAR PEDIDO</button>
-  </div>
-
-  <script src="/js/carrito.js"></script>
-</body>
-</html>
+</div>

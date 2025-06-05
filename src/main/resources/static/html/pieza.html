@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/css/pieza.css">
 
   <script src="/js/piezas.js" defer></script>
+  <script src="/js/carrito.js" defer></script>
 
    <!-- Bootstrap CSS -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -36,7 +37,7 @@
         <a href="/html/usuario.html">
             <svg class="icon-user" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></g></svg>
           </a>
-          <a href="/html/carrito.html"">
+          <a href="/carrito">
             <svg  class="icon-bag" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M6.45 9.23h11.1a1.85 1.85 0 0 1 1.85 1.85v6.472a3.7 3.7 0 0 1-3.7 3.698H8.3a3.7 3.7 0 0 1-3.7-3.698V11.08a1.85 1.85 0 0 1 1.85-1.85"/><path d="M16.625 11.553V7.381a4.62 4.62 0 0 0-2.852-4.278a4.627 4.627 0 0 0-6.398 4.278v4.172"/></g></svg>
           </a>
      </div>
@@ -127,7 +128,8 @@
                 <span class="color brown"></span>
             </div>
         </div>
-        <button class="cesta">CONTACT ARTIST</button>
+        <button onclick="anadirACesta(1)">AÑADIR A LA CESTA</button>
+        <span id="tick-1" class="tick" style="display:none;">✔ Añadido</span>
     </div>
 </section>
 
@@ -191,6 +193,33 @@
       </div>
   </div>
 </footer>
+
+<script>
+async function agregarAlCarrito(producto) {
+    const sesion = await fetch('/api/carrito/sesion-usuario');
+    if (sesion.status !== 200) {
+        alert("Debes iniciar sesión para añadir productos.");
+        return;
+    }
+
+    const response = await fetch('/api/carrito/agregar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(producto)
+    });
+
+    if (response.ok) {
+        const btn = document.getElementById(`btn-${producto.idProducto}`);
+        btn.textContent = "✔ Añadido";
+        btn.disabled = true;
+    } else {
+        alert("Error al añadir el producto.");
+    }
+}
+</script>
+
 
 </body>
 </html>

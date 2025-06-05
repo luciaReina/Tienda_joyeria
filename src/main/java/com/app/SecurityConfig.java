@@ -34,6 +34,7 @@ public class SecurityConfig  {
         .csrf(AbstractHttpConfigurer::disable)
         .cors(cors -> cors.disable())
         .authorizeHttpRequests(auth -> auth
+        		.requestMatchers(HttpMethod.POST, "/api/solicitudes").permitAll()
                 .requestMatchers(HttpMethod.POST,"/auth/registro" ).permitAll()
         		.requestMatchers("/css/**", "/html/**", "/assets/**", "/img/**" , "/js/**", "/registro").permitAll()
                 .anyRequest().authenticated()

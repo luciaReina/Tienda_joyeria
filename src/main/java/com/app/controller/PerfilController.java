@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +25,9 @@ public class PerfilController {
     public ResponseEntity<Usuario> obtenerPerfil(Authentication authentication) {
         // Puedes usar 'authentication' para obtener el usuario autenticado
         String username = authentication.getName();
-
         // Aquí puedes buscar al usuario en tu base de datos por email
         Optional <Usuario> usuario = usuarioService.obtenerUsuarioPorNombre(username);
+        
         if (usuario.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
