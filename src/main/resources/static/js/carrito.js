@@ -1,5 +1,5 @@
 function anadirACesta(idProducto) {
-    fetch('/usuario/logueado')
+    fetch("http://localhost:8080/usuario/perfil", { credentials: "include" }) 
         .then(response => {
             if (response.status === 200) {
                 return response.json(); // usuario logueado
@@ -8,10 +8,11 @@ function anadirACesta(idProducto) {
             }
         })
         .then(usuario => {
-            return fetch('/carrito/agregar', {
+			console.log(idProducto);
+            return fetch('http://localhost:8080/carrito/agregar', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ idProducto })
+                body: JSON.stringify({ idProducto }),
             });
         })
         .then(res => {
@@ -26,6 +27,6 @@ function anadirACesta(idProducto) {
         })
         .catch(() => {
             alert('Debes iniciar sesión para añadir productos a la cesta.');
-            window.location.href = '/html/usuario.html'; // redirige al login
+            window.location.href = '/html/login.html'; // redirige al login
         });
 }

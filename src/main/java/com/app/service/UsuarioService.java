@@ -71,4 +71,14 @@ public class UsuarioService implements UserDetailsService {
     public List<Usuario> findAll() {
         return usuarioRepository.findAll();
     }
+    
+
+	public Usuario findById(Integer id) {
+		return usuarioRepository.findById(id).orElse(null);
+	}
+
+	public void deleteById(Integer id) {
+		usuarioRepository.deleteById(id);
+		
+	}
 }

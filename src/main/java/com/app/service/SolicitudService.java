@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.model.Pedido;
 import com.app.model.Solicitud;
 import com.app.repository.SolicitudRepository;
 
@@ -17,5 +18,18 @@ public class SolicitudService {
     public List<Solicitud> findAll() {
         return solicitudRepository.findAll();
     }
+    
+	public void save(Solicitud solicitud) {
+		solicitudRepository.save(solicitud);
+	}
+
+	public Solicitud findById(Integer id) {
+		return solicitudRepository.findById(id).orElse(null);
+	}
+
+	public void deleteById(Integer id) {
+		solicitudRepository.deleteById(id);
+		
+	}
 
 }

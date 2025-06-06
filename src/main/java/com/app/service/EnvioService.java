@@ -17,4 +17,17 @@ public class EnvioService {
     public List<Envio> findAll() {
         return envioRepository.findAll();
     }
+    
+	public void save(Envio envio) {
+		envioRepository.save(envio);
+	}
+
+	public Envio findById(Integer id) {
+		return envioRepository.findById(id).orElse(null);
+	}
+
+	public void deleteById(Integer id) {
+		envioRepository.deleteById(id);
+		
+	}
 }

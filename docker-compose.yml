@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # Servicio para tu aplicación Spring Boot
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile # Asegúrate de tener un Dockerfile en la raíz de tu proyecto Spring Boot
+    ports:
+      
+"8080:8080" # Puerto de tu aplicación Spring Boot
+  environment:# Variables de entorno para la conexión a la base de datos desde Spring
+    SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/mydatabase?useSSL=false&allowPublicKeyRetrieval=true
+    SPRING_DATASOURCE_USERNAME: myuser
+    SPRING_DATASOURCE_PASSWORD: mypassword
+  depends_on:
+db # La aplicación Spring depende de que la base de datos esté levantada
+
+  # Servicio para la base de datos SQL (MySQL en este caso)
+  db:
+    image: mysql:8.0 # Puedes cambiar a postgres:13 si prefieres PostgreSQL
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword # Contraseña de root para MySQL
+      MYSQL_DATABASE: mydatabase # Nombre de la base de datos
+      MYSQL_USER: myuser # Usuario para la base de datos
+      MYSQL_PASSWORD: mypassword # Contraseña para el usuario de la base de datos
+    ports:
+      
+"3306:3306" # Puerto de la base de datos (puedes omitirlo si solo necesitas acceso desde la app)
+  volumes:
+db_data:/var/lib/mysql # Persistencia de los datos de la base de datos
+
+  # Servicio para phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      
+db:db # Enlaza phpMyAdmin con el servicio de la base de datos
+  ports:
+"8081:80" # Puerto para acceder a phpMyAdmin en tu navegador
+environment:
+  PMA_HOST: db # El nombre del host de la base de datos (debe coincidir con el nombre del servicio 'db')
+  PMA_PORT: 3306 # El puerto de la base de datos
+  MYSQL_ROOT_PASSWORD: rootpassword # La contraseña de root de MySQL para que phpMyAdmin pueda iniciar sesión con ella
+
+volumes:
+  db_data: # Define el volumen para la persistencia de datos de la base de datos

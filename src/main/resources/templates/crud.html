@@ -4,9 +4,12 @@
 <head>
     <title th:text="${title}">Panel Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/admin-style.css}">
+    <link rel="stylesheet">
     
     <script th:src="@{/js/crud.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
     <style>
         :root {
             --main-bg: #2d004d;
@@ -69,6 +72,53 @@
         .titulo{
             font-size: 30px;
         }
+        
+         .popup-overlay {
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    width: 100vw;
+		    height: 100vh;
+		    background-color: rgba(0, 0, 0, 0.6);
+		    display: none;
+		    justify-content: center;
+		    align-items: center;
+		    z-index: 9999;
+		  }
+		
+		  .popup-content {
+		    background-color: #fff;
+		    padding: 2rem;
+		    border-radius: 12px;
+		    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+		    max-width: 400px;
+		    width: 90%;
+		    text-align: center;
+		    animation: fadeIn 0.3s ease-in-out;
+		  }
+		
+		  .popup-text {
+		    font-size: 1.1rem;
+		    margin-bottom: 1.5rem;
+		  }
+		
+		  .popup-buttons {
+		    display: flex;
+		    justify-content: flex-end;
+		    gap: 1rem;
+		  }
+		
+		  @keyframes fadeIn {
+		    from {
+		      transform: scale(0.95);
+		      opacity: 0;
+		    }
+		    to {
+		      transform: scale(1);
+		      opacity: 1;
+		    }
+		  }
+  
     </style>
 </head>
 <body class="d-flex">
@@ -100,11 +150,16 @@
     </header>
 
     <div class="p-4" style="background-color: var(--main-light); min-height: 100vh;">
+	    <!-- Mensaje flash -->
+	    <div th:if="${mensaje}" class="alert alert-success alert-dismissible fade show" role="alert">
+	        <span th:text="${mensaje}"></span>
+	        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	    </div>
 
         <!-- Productos -->
         <div id="productos" class="card p-4">
             <div class="section-title">Productos</div>
-            <a class="btn btn-primary mb-3" href="#">+ Nuevo</a>
+            <a class="btn btn-primary mb-3" th:href="@{/admin/productos/nuevo}">+ Nuevo</a>
             <table class="table table-bordered paginable" id="tabla-productos">
                 <thead>
                     <tr>
@@ -124,127 +179,133 @@
 					    <td th:text="${p.nombre}"></td>
 					    <td th:text="${p.descripcion}"></td>
 					    <td th:text="${p.estilo}"></td>
-					    <td th:text="${p.categoria}"></td>
+					    <td th:text="${p.categoria.getTipo()}"></td>
 					    <td th:text="|${p.precio} €|"></td>
 					    <td th:text="${p.stock}"></td>
 					    
 					    <td>
-					        <a href="#" class="btn btn-outline-secondary">Editar</a>
-					        <a href="#" class="btn btn-sm btn-secondary">Eliminar</a>
-					    </td>
+						  <a th:href="@{'/admin/productos/editar/' + ${p.idProducto}}" class="btn btn-outline-secondary">Editar</a>
+						  <a href="#" 
+						     class="btn btn-sm btn-secondary btn-eliminar" 
+						     th:attr="data-url=@{'/admin/productos/eliminar/' + ${p.idProducto}}">
+						     Eliminar
+						  </a>
+						</td>
 					</tr>
                 </tbody>
             </table>
         </div>
 
         <!-- Usuarios -->
-        <div id="usuarios" class="card p-4">
-            <div class="section-title">Usuarios</div>
-            <a class="btn btn-primary mb-3" href="#">+ Nuevo</a>
-            <table  class="table table-bordered paginable" id="tabla-usuarios">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Email</th>
-                        <th>Telefono</th>
-                        <th>Pais</th>
-                        <th>Ciudad</th>
-                        <th>Calle</th>
-                        <th>Codigo Postal</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="u : ${usuarios}">
-					    <td th:text="${u.idUsuario}"></td>
-					    <td th:text="${u.username}"></td>
-					    <td th:text="${u.apellido}"></td>
-					    <td th:text="${u.email}"></td>
-					    <td th:text="${u.telefono}"></td>
-					    <td th:text="${u.pais}"></td>
-					    <td th:text="${u.ciudad}"></td>
-					    <td th:text="${u.calle}"></td>
-					    <td th:text="${u.codigoPostal}"></td>
-					    
-					    <td>
-					        <a href="#" class="btn btn-outline-secondary">Editar</a>
-					        <a href="#" class="btn btn-sm btn-secondary">Eliminar</a>
-					    </td>
-					</tr>
+		<div id="usuarios" class="card p-4">
+		    <div class="section-title">Usuarios</div>
+		    <a class="btn btn-primary mb-3" th:href="@{/admin/usuarios/nuevo}">+ Nuevo</a>
+		    <table class="table table-bordered paginable" id="tabla-usuarios">
+		        <thead>
+		            <tr>
+		                <th>ID</th>
+		                <th>Nombre</th>
+		                <th>Apellido</th>
+		                <th>Email</th>
+		                <th>Teléfono</th>
+		                <th>País</th>
+		                <th>Ciudad</th>
+		                <th>Calle</th>
+		                <th>Código Postal</th>
+		                <th>Acciones</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <tr th:each="u : ${usuarios}">
+		                <td th:text="${u.idUsuario}"></td>
+		                <td th:text="${u.username}"></td>
+		                <td th:text="${u.apellido}"></td>
+		                <td th:text="${u.email}"></td>
+		                <td th:text="${u.telefono}"></td>
+		                <td th:text="${u.pais}"></td>
+		                <td th:text="${u.ciudad}"></td>
+		                <td th:text="${u.calle}"></td>
+		                <td th:text="${u.codigoPostal}"></td>
+		                <td>
+		                    <a th:href="@{'/admin/usuarios/editar/' + ${u.idUsuario}}" class="btn btn-outline-secondary">Editar</a>
+		                    <a href="#"
+		                       class="btn btn-sm btn-secondary btn-eliminar"
+		                       th:attr="data-url=@{'/admin/usuarios/eliminar/' + ${u.idUsuario}}">
+		                       Eliminar
+		                    </a>
+		                </td>
+		            </tr>
+		        </tbody>
+		    </table>
+		</div>
 
-                </tbody>
-            </table>
-        </div>
 
         <!-- Pedidos -->
         <div id="pedidos" class="card p-4">
-            <div class="section-title">Pedidos</div>
-            <a class="btn btn-primary mb-3" href="#">+ Nuevo</a>
-            <table  class="table table-bordered paginable" id="tabla-pedidos">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Usuario</th>
-                        <th>Producto</th>
-                        <th>Fecha pedido</th>
-                        <th>Estado</th>
-                        <th>Precio Total</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="p : ${pedidos}">
-					    <td th:text="${p.idPedido}"></td>
-					    <td th:text="${p.usuario.getUsername()}"></td>
-					    <td th:text="${p.producto.getNombre()}"></td>
-					    <td th:text="|${p.precioTotal} €|"></td>
-					    <td th:text="${p.estado}"></td>
-					    <td th:text="${p.fechaPedido}"></td>
-					    
-					    <td>
-					        <a href="#" class="btn btn-outline-secondary">Editar</a>
-					        <a href="#" class="btn btn-sm btn-secondary">Eliminar</a>
-					    </td>
-					</tr>
-
-                </tbody>
-            </table>
-        </div>
+	    <div class="section-title">Pedidos</div>
+	    <a class="btn btn-primary mb-3" th:href="@{/admin/pedido/nuevo}">+ Nuevo</a>
+	    <table class="table table-bordered paginable" id="tabla-pedidos">
+	        <thead>
+	            <tr>
+	                <th>ID</th>
+	                <th>Usuario</th>
+	                <th>Producto</th>
+	                <th>Fecha pedido</th>
+	                <th>Estado</th>
+	                <th>Precio Total</th>
+	                <th>Acciones</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr th:each="p : ${pedidos}">
+	                <td th:text="${p.idPedido}"></td>
+	                <td th:text="${p.usuario.username}"></td>
+	                <td th:text="${p.producto.nombre}"></td>
+	                <td th:text="${#dates.format(p.fechaPedido, 'dd/MM/yyyy HH:mm')}"></td>
+	                <td th:text="${p.estado}"></td>
+	                <td th:text="|${p.precioTotal} €|"></td>
+	                <td>
+	                    <a th:href="@{/admin/pedido/editar/{id}(id=${p.idPedido})}" class="btn btn-outline-secondary btn-sm">Editar</a>
+	                    <a th:href="@{/admin/pedido/eliminar/{id}(id=${p.idPedido})}" class="btn btn-sm btn-secondary" 
+	                       onclick="return confirm('¿Está seguro de eliminar este pedido?');">Eliminar</a>
+	                </td>
+	            </tr>
+	        </tbody>
+	    </table>
+	</div>
 
         <!-- Solicitudes -->
-        <div id="solicitudes" class="card p-4">
-            <div class="section-title">Solicitudes</div>
-            <a class="btn btn-primary mb-3" href="#">+ Nueva</a>
-            <table class="table table-bordered paginable" id="tabla-solicitudes">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Usuario</th>
-                        <th>Asunto</th>
-                        <th>Mensaje</th>
-                        <th>Fecha Solicitud</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="s : ${solicitudes}">
-					    <td th:text="${s.idSolicitud}"></td>
-					    <td th:text="${s.usuario.getUsername()}"></td>
-					    <td th:text="${s.asunto}"></td>
-					    <td th:text="${s.mensaje}"></td>
-					    <td th:text="${s.fechaSolicitud}"></td>
-					    
-					    <td>
-					        <a href="#" class="btn btn-outline-secondary">Editar</a>
-					        <a href="#" class="btn btn-sm btn-secondary">Eliminar</a>
-					    </td>
-					</tr>
+		<div id="solicitudes" class="card p-4">
+		    <div class="section-title">Solicitudes</div>
+		    <a class="btn btn-primary mb-3" th:href="@{/admin/solicitud/nuevo}">+ Nuevo</a>
+		    <table class="table table-bordered paginable" id="tabla-solicitudes">
+		        <thead>
+		            <tr>
+		                <th>ID</th>
+		                <th>Usuario</th>
+		                <th>Asunto</th>
+		                <th>Mensaje</th>
+		                <th>Fecha Solicitud</th>
+		                <th>Acciones</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <tr th:each="s : ${solicitudes}">
+		                <td th:text="${s.idSolicitud}"></td>
+		                <td th:text="${s.usuario.username}"></td>
+		                <td th:text="${s.asunto}"></td>
+		                <td th:text="${s.mensaje}"></td>
+		                <td th:text="${s.fechaSolicitud}"></td>
+		                <td>
+		                    <a th:href="@{/solicitudes/editar/{id}(id=${s.idSolicitud})}" class="btn btn-outline-secondary">Editar</a>
+		                    <a th:href="@{/solicitudes/eliminar/{id}(id=${s.idSolicitud})}" class="btn btn-sm btn-secondary"
+		                       onclick="return confirm('¿Estás seguro de que deseas eliminar esta solicitud?');">Eliminar</a>
+		                </td>
+		            </tr>
+		        </tbody>
+		    </table>
+		</div>
 
-                </tbody>
-            </table>
-        </div>
 
      <!-- Envíos -->
         <div id="envios" class="card p-4">
@@ -267,12 +328,12 @@
                     <tr th:each="e : ${envios}">
 					    <td th:text="${e.idEnvio}"></td>
 					    <td th:text="${e.pedido.getIdPedido()}"></td>
-					    <td th:text="${e.fechaEnvio}"></td>
-					    <td th:text="${e.estado}"></td>
 					    <td th:text="${e.pais}"></td>
 					    <td th:text="${e.ciudad}"></td>
 					    <td th:text="${e.calle}"></td>
 					    <td th:text="${e.codigoPostal}"></td>
+					    <td th:text="${e.estado}"></td>
+					    
   
 					    <td>
 					        <a href="#" class="btn btn-outline-secondary">Editar</a>
@@ -338,9 +399,53 @@
 
                 </tbody>
             </table>
-        </div>
+        </div>>
     </div>
 </div>
 
+	<!-- Popup único -->
+	<div id="confirmPopup" class="popup-overlay" style="display:none;">
+	  <div class="popup-content">
+	    <p>¿Estás seguro de eliminar este elemento?</p>
+	    <button id="btnConfirm" class="btn btn-success">Confirmar</button>
+	    <button id="btnCancel" class="btn btn-secondary">Cancelar</button>
+	  </div>
+	</div>
+	
 </body>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const popup = document.getElementById('confirmPopup');
+    const btnConfirm = document.getElementById('btnConfirm');
+    const btnCancel = document.getElementById('btnCancel');
+    let urlEliminar = null;
+
+    document.querySelectorAll('.btn-eliminar').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        urlEliminar = this.getAttribute('data-url');
+        popup.style.display = 'flex';
+      });
+    });
+
+    btnConfirm.addEventListener('click', () => {
+      if (urlEliminar) {
+        window.location.href = urlEliminar;
+      }
+    });
+
+    btnCancel.addEventListener('click', () => {
+      popup.style.display = 'none';
+      urlEliminar = null;
+    });
+
+    popup.addEventListener('click', function(e) {
+      if (e.target === popup) {
+        popup.style.display = 'none';
+        urlEliminar = null;
+      }
+    });
+  });
+</script>
+
 </html>

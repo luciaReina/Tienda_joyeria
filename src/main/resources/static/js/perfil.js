@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("username").textContent = usuario.username + " " + usuario.apellido;
       document.getElementById("email").textContent = usuario.email;
       document.getElementById("telefono").textContent = usuario.telefono || "No definido";
-      document.getElementById("direccion").textContent = usuario.direccion || "No definida";
+      document.getElementById("direccion").textContent = usuario.ciudad + ", " + usuario.calle || "No definida";
     })
     .catch(err => {
       window.location.href = "/html/login.html";

@@ -17,4 +17,17 @@ public class CategoriaService {
     public List<Categoria> findAll() {
         return categoriaRepository.findAll();
     }
+
+	public void save(Categoria categoria) {
+		categoriaRepository.save(categoria);
+	}
+
+	public Categoria findById(Integer id) {
+		return categoriaRepository.findById(id).orElse(null);
+	}
+
+	public void deleteById(Integer id) {
+		categoriaRepository.deleteById(id);
+		
+	}
 }
