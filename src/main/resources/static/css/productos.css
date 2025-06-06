@@ -168,7 +168,7 @@ nav.menu-nav a:hover {
   transition: transform 0.3s ease;
 }
 
-/*cabecera productos y filtros*/
+/*cabecera productos y filtros
 .contenedor {
   display: flex;
   width: 100%;
@@ -177,7 +177,7 @@ nav.menu-nav a:hover {
 }
 
 .header_productos {
-  width: 90%; /* ocupa el 80% del ancho */
+  width: 90%; /* ocupa el 80% del ancho 
   background-color: #e8e7f7b8;
   padding: 10px;
   margin-right: 5px
@@ -207,13 +207,14 @@ nav.menu-nav a:hover {
 
 .icon-filtro {             
   fill: #2E0E46; 
-}
+}*/
 
 /*productos*/
 .cuerpo2 {
   text-align: left;
   color: #2E0E46;
   margin-bottom: 40px;
+  margin-top:280px;
 }
 
 .proyectos {
@@ -446,6 +447,14 @@ nav.menu-nav a:hover {
     overflow: hidden;
     cursor: pointer;
   }
+  
+  /*productos*/
+	.cuerpo2 {
+	  text-align: left;
+	  color: #2E0E46;
+	  margin-bottom: 40px;
+	  margin-top:170px;
+	}
 }
 
 /* Media query para pantallas muy pequeñas (por debajo de 600px) */
@@ -485,6 +494,14 @@ nav.menu-nav a:hover {
     overflow: hidden;
     cursor: pointer;
   }
+  
+  /*productos*/
+	.cuerpo2 {
+	  text-align: left;
+	  color: #2E0E46;
+	  margin-bottom: 40px;
+	  margin-top:130px;
+	}
 
 }
 

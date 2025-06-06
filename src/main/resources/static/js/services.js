@@ -1,7 +1,7 @@
 document.getElementById('formulario').addEventListener('submit', function(e) {
   e.preventDefault();
 
-  const estaLogueado = document.body.getAttribute('data-logueado');
+  const estaLogueado = document.body.getAttribute('data-logueado', false);
 
   if (!estaLogueado) {
     alert('Tienes que iniciar sesión para acceder al formulario');

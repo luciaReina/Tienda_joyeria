@@ -67,4 +67,8 @@ public class UsuarioService implements UserDetailsService {
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
     }
+    
+    public List<Usuario> findAll() {
+        return usuarioRepository.findAll();
+    }
 }

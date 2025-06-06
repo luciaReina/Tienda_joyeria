@@ -120,17 +120,17 @@
                 </thead>
                 <tbody>
                     <tr th:each="p : ${productos}">
-					    <td th:text="${p.id}">1</td>
-					    <td th:text="${p.nombre}">Anillo de plata</td>
-					    <td th:text="${p.descripcion}">Elegante</td>
-					    <td th:text="${p.estilo}">Clásico</td>
-					    <td th:text="${p.categoria.nombre}">Joyas</td>
-					    <td th:text="|${p.precio} €|">120 €</td>
-					    <td th:text="${p.stock}">10</td>
+					    <td th:text="${p.idProducto}"></td>
+					    <td th:text="${p.nombre}"></td>
+					    <td th:text="${p.descripcion}"></td>
+					    <td th:text="${p.estilo}"></td>
+					    <td th:text="${p.categoria}"></td>
+					    <td th:text="|${p.precio} €|"></td>
+					    <td th:text="${p.stock}"></td>
 					    
 					    <td>
-					        <a href="#" class="btn btn-sm btn-warning">Editar</a>
-					        <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					        <a href="#" class="btn btn-outline-secondary">Editar</a>
+					        <a href="#" class="btn btn-sm btn-secondary">Eliminar</a>
 					    </td>
 					</tr>
                 </tbody>
@@ -158,19 +158,19 @@
                 </thead>
                 <tbody>
                     <tr th:each="u : ${usuarios}">
-					    <td th:text="${u.id}">1</td>
-					    <td th:text="${u.nombre}">Ana</td>
-					    <td th:text="${u.apellidos}">Pérez</td>
-					    <td th:text="${u.email}">ana@correo.com</td>
-					    <td th:text="${u.telefono}">123456789</td>
-					    <td th:text="${u.pais}">España</td>
-					    <td th:text="${u.ciudad}">Madrid</td>
-					    <td th:text="${u.calle}">Gran Vía 1</td>
-					    <td th:text="${u.codigoPostal}">28013</td>
+					    <td th:text="${u.idUsuario}"></td>
+					    <td th:text="${u.username}"></td>
+					    <td th:text="${u.apellido}"></td>
+					    <td th:text="${u.email}"></td>
+					    <td th:text="${u.telefono}"></td>
+					    <td th:text="${u.pais}"></td>
+					    <td th:text="${u.ciudad}"></td>
+					    <td th:text="${u.calle}"></td>
+					    <td th:text="${u.codigoPostal}"></td>
 					    
 					    <td>
-					        <a href="#" class="btn btn-sm btn-warning">Editar</a>
-					        <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					        <a href="#" class="btn btn-outline-secondary">Editar</a>
+					        <a href="#" class="btn btn-sm btn-secondary">Eliminar</a>
 					    </td>
 					</tr>
 
@@ -196,16 +196,16 @@
                 </thead>
                 <tbody>
                     <tr th:each="p : ${pedidos}">
-					    <td th:text="${p.id}">1</td>
-					    <td th:text="${p.cliente.nombre}">Carlos</td>
-					    <td th:text="${p.productosResumen}">Anillo x2</td>
-					    <td th:text="${p.fechaPedido}">2025-06-01</td>
-					    <td th:text="${p.estado}">Pendiente</td>
-					    <td th:text="|${p.precioTotal} €|">240 €</td>
+					    <td th:text="${p.idPedido}"></td>
+					    <td th:text="${p.usuario.getUsername()}"></td>
+					    <td th:text="${p.producto.getNombre()}"></td>
+					    <td th:text="|${p.precioTotal} €|"></td>
+					    <td th:text="${p.estado}"></td>
+					    <td th:text="${p.fechaPedido}"></td>
 					    
 					    <td>
-					        <a href="#" class="btn btn-sm btn-warning">Editar</a>
-					        <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					        <a href="#" class="btn btn-outline-secondary">Editar</a>
+					        <a href="#" class="btn btn-sm btn-secondary">Eliminar</a>
 					    </td>
 					</tr>
 
@@ -230,15 +230,15 @@
                 </thead>
                 <tbody>
                     <tr th:each="s : ${solicitudes}">
-					    <td th:text="${s.id}">1</td>
-					    <td th:text="${s.cliente.nombre}">Carlos</td>
-					    <td th:text="${s.asunto}">Personalizado</td>
-					    <td th:text="${s.mensaje}">¿Podéis grabar mi nombre?</td>
-					    <td th:text="${s.fechaSolicitud}">2025-06-01</td>
+					    <td th:text="${s.idSolicitud}"></td>
+					    <td th:text="${s.usuario.getUsername()}"></td>
+					    <td th:text="${s.asunto}"></td>
+					    <td th:text="${s.mensaje}"></td>
+					    <td th:text="${s.fechaSolicitud}"></td>
 					    
 					    <td>
-					        <a href="#" class="btn btn-sm btn-warning">Editar</a>
-					        <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					        <a href="#" class="btn btn-outline-secondary">Editar</a>
+					        <a href="#" class="btn btn-sm btn-secondary">Eliminar</a>
 					    </td>
 					</tr>
 
@@ -265,17 +265,18 @@
                 </thead>
                 <tbody>
                     <tr th:each="e : ${envios}">
-					    <td th:text="${e.id}">1</td>
-					    <td th:text="${e.pedido.id}">#1001</td>
-					    <td th:text="${e.pais}">España</td>
-					    <td th:text="${e.ciudad}">Sevilla</td>
-					    <td th:text="${e.calle}">Calle Falsa 123</td>
-					    <td th:text="${e.codigoPostal}">41001</td>
-					    <td th:text="${e.estado}">Entregado</td>
-					    
+					    <td th:text="${e.idEnvio}"></td>
+					    <td th:text="${e.pedido.getIdPedido()}"></td>
+					    <td th:text="${e.fechaEnvio}"></td>
+					    <td th:text="${e.estado}"></td>
+					    <td th:text="${e.pais}"></td>
+					    <td th:text="${e.ciudad}"></td>
+					    <td th:text="${e.calle}"></td>
+					    <td th:text="${e.codigoPostal}"></td>
+  
 					    <td>
-					        <a href="#" class="btn btn-sm btn-warning">Editar</a>
-					        <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					        <a href="#" class="btn btn-outline-secondary">Editar</a>
+					        <a href="#" class="btn btn-sm btn-secondary">Eliminar</a>
 					    </td>
 					</tr>
 
@@ -298,13 +299,13 @@
                 </thead>
                 <tbody>
                     <tr th:each="p : ${pagos}">
-					    <td th:text="${p.id}">1</td>
-					    <td th:text="${p.pedido.id}">#1001</td>
-					    <td th:text="${p.fechaPago}">2025-06-01</td>
+					    <td th:text="${p.idPago}"></td>
+					    <td th:text="${p.pedido.getIdPedido}"></td>
+					    <td th:text="${p.fechaPago}"></td>
 					    
 					    <td>
-					        <a href="#" class="btn btn-sm btn-warning">Editar</a>
-					        <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					        <a href="#" class="btn btn-outline-secondary">Editar</a>
+					        <a href="#" class="btn btn-sm btn-dark">Eliminar</a>
 					    </td>
 					</tr>
 
@@ -320,20 +321,18 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
+                        <th>Tipo</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="c : ${categorias}">
-					    <td th:text="${c.id}">1</td>
-					    <td th:text="${c.nombre}">Anillos</td>
-					    <td th:text="${c.descripcion}">Descripción de anillos</td>
+					    <td th:text="${c.idCategoria}"></td>
+					    <td th:text="${c.tipo}"></td>
 					    
 					    <td>
-					        <a href="#" class="btn btn-sm btn-warning">Editar</a>
-					        <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					        <a href="#" class="btn btn-outline-secondary">Editar</a>
+					        <a href="#" class="btn btn-sm btn-dark">Eliminar</a>
 					    </td>
 					</tr>
 

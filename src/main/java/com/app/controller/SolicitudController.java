@@ -4,8 +4,11 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,8 @@ import com.app.model.Usuario;
 import com.app.repository.SolicitudRepository;
 import com.app.repository.UsuarioRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/solicitudes")
 public class SolicitudController {
@@ -25,17 +30,21 @@ public class SolicitudController {
     private SolicitudRepository solicitudRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;  // para buscar el usuario en BD
+    private UsuarioRepository usuarioRepository;
 
     @PostMapping
-    public Solicitud crearSolicitud(@RequestBody SolicitudDTO solicitudDTO) {
-    	System.out.println("Llegó petición con asunto: " + solicitudDTO.getAsunto());
+    public ResponseEntity<?> crearSolicitud(@Valid @RequestBody SolicitudDTO solicitudDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            // Aquí puedes enviar los errores de validación al cliente
+            return ResponseEntity.badRequest().body(result.getAllErrors());
+        }
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
         Optional<Usuario> usuario = usuarioRepository.findByUsername(username);
         if (usuario.isEmpty()) {
-            throw new RuntimeException("Usuario no encontrado");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario no encontrado o no autenticado");
         }
 
         Solicitud solicitud = new Solicitud();
@@ -44,6 +53,8 @@ public class SolicitudController {
         solicitud.setAsunto(solicitudDTO.getAsunto());
         solicitud.setMensaje(solicitudDTO.getMensaje());
 
-        return solicitudRepository.save(solicitud);
+        Solicitud savedSolicitud = solicitudRepository.save(solicitud);
+
+        return ResponseEntity.ok(savedSolicitud);
     }
 }
