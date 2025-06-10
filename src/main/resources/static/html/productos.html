@@ -99,11 +99,16 @@
   </div>-->
 
 <!--Productos-->
+
+  <h2>Explora Nuestros Artículos</h2>
+  <div id="loadingMessage">Cargando productos...</div>
+  <div id="errorMessage" style="display: none;"></div>
+
   <section class="cuerpo2">
-      <div class="proyectos">
+      <div class="proyectos" id="productos-container">
     
        <!-- Iteración de productos -->
-    <div th:each="producto, iterStat : ${productos}">
+    <!-- <div th:each="producto, iterStat : ${productos}">
       <a th:href="@{/pieza(id=${producto.idProducto})}" class="proyecto-enlace">
         <div class="proyecto" th:id="'producto' + ${iterStat.count}">
           
@@ -122,11 +127,11 @@
           <p th:text="${#numbers.formatDecimal(producto.precio, 1, 'POINT', 2, 'NONE')} + '$'">Precio</p>
         </div>
       </a>
-    </div>
+    </div> -->
 
     
         <!-- Proyecto 2 -->
-      <a href="/pieza" class="proyecto-enlace">
+      <!-- <a href="/pieza" class="proyecto-enlace">
         <div class="proyecto" id="producto2"> 
           <div class="producto-imagen">
             <img class="imagen-principal" src="/img/cat1.png" alt="foto1">
@@ -140,10 +145,10 @@
           <h4>Shimmer Leaf Ring</h4>
           <p>275.00$</p>
         </div>
-      </a>
+      </a> -->
     
         <!-- Proyecto 3 -->
-      <a href="/pieza" class="proyecto-enlace">
+      <!-- <a href="/pieza" class="proyecto-enlace">
         <div class="proyecto" id="producto3"> 
           <div class="producto-imagen">
             <img class="imagen-principal" src="/img/cat1.png" alt="foto1">
@@ -157,10 +162,10 @@
           <h4>Starflower Earrings</h4>
           <p>450.00$</p>
         </div>
-      </a>
+      </a> -->
     
         <!-- Proyecto 4 -->
-      <a href="/pieza" class="proyecto-enlace">
+      <!-- <a href="/pieza" class="proyecto-enlace">
         <div class="proyecto" id="producto4"> 
           <div class="producto-imagen">
             <img class="imagen-principal" src="/img/cat2.png" alt="foto1">
@@ -174,10 +179,10 @@
           <h4>Starflower Earrings</h4>
           <p>450.00$</p>
         </div>
-      </a>
+      </a> -->
 
         <!-- Proyecto 5 -->
-      <a href="/pieza" class="proyecto-enlace">
+      <!-- <a href="/pieza" class="proyecto-enlace">
         <div class="proyecto" id="producto5"> 
           <div class="producto-imagen">
             <img class="imagen-principal" src="/img/cat2.png" alt="foto1">
@@ -191,10 +196,10 @@
           <h4>Starflower Earrings</h4>
           <p>450.00$</p>
         </div>
-      </a>
+      </a> -->
 
         <!-- Proyecto 6 -->
-      <a href="/pieza" class="proyecto-enlace">
+      <!-- <a href="/pieza" class="proyecto-enlace">
         <div class="proyecto" id="producto6"> 
           <div class="producto-imagen">
             <img class="imagen-principal" src="/img/cat2.png" alt="foto1">
@@ -208,7 +213,7 @@
           <h4>Starflower Earrings</h4>
           <p>450.00$</p>
         </div>
-      </a>
+      </a> -->
 
       </div>
     </section>

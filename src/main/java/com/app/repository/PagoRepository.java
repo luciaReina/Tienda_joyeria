@@ -7,4 +7,3 @@ import com.app.model.Pago;
 public interface PagoRepository extends JpaRepository<Pago, Integer> {
     
 }
-

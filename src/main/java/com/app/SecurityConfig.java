@@ -36,6 +36,12 @@ public class SecurityConfig  {
         .authorizeHttpRequests(auth -> auth
         		.requestMatchers(HttpMethod.POST, "/carrito/agregar").permitAll()
         		.requestMatchers(HttpMethod.POST, "/api/solicitudes").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/admin/api/solicitudes/eliminar/{idSolicitud}").hasRole("ADMIN")
+                // CATEGORIA
+                .requestMatchers("/admin/categoria/**").permitAll()
+                // PRODUCTOS
+                .requestMatchers("/admin/productos/**").permitAll()
+//                .requestMatchers(HttpMethod.GET, "admin/productos/productos").permitAll()
                 .requestMatchers(HttpMethod.POST,"/auth/registro" ).permitAll()
         		.requestMatchers("/css/**", "/html/**", "/assets/**", "/img/**" , "/js/**", "/registro").permitAll()
                 .anyRequest().authenticated()

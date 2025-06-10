@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import com.app.model.Solicitud;
+import com.app.repository.SolicitudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,6 +24,9 @@ public class UsuarioService implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private SolicitudRepository solicitudRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -78,6 +83,11 @@ public class UsuarioService implements UserDetailsService {
 	}
 
 	public void deleteById(Integer id) {
+
+        List<Solicitud> solicitudesUsuario = solicitudRepository.findAllByUsuario(usuarioRepository.findById(id).get());
+
+        solicitudRepository.deleteAll(solicitudesUsuario);
+
 		usuarioRepository.deleteById(id);
 		
 	}

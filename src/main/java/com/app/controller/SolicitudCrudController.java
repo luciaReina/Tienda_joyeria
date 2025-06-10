@@ -19,13 +19,13 @@ import com.app.service.UsuarioService;
 @Controller
 @RequestMapping("/admin/solicitud")
 public class SolicitudCrudController {
-	
-	@Autowired
+
+    @Autowired
     private UsuarioService usuarioService;
-    
+
     @Autowired
     private SolicitudService solicitudService;
-	
+
     @GetMapping("/nuevo")
     public String mostrarFormularioNueva(Model model) {
         model.addAttribute("solicitud", new Solicitud());
@@ -38,37 +38,37 @@ public class SolicitudCrudController {
         return "solicitud";
     }
 
-	    @PostMapping("/guardar")
-	    public String guardarSolicitud(@ModelAttribute Solicitud solicitud, RedirectAttributes redirectAttrs) {
-	        boolean esNueva = (solicitud.getIdSolicitud() == null);
-	        solicitudService.save(solicitud);
+    @PostMapping("/guardar")
+    public String guardarSolicitud(@ModelAttribute Solicitud solicitud, RedirectAttributes redirectAttrs) {
+        boolean esNueva = (solicitud.getIdSolicitud() == null);
+        solicitudService.save(solicitud);
 
-	        if (esNueva) {
-	            redirectAttrs.addFlashAttribute("mensaje", "La solicitud se ha guardado correctamente.");
-	        } else {
-	            redirectAttrs.addFlashAttribute("mensaje", "La solicitud se ha editado correctamente.");
-	        }
+        if (esNueva) {
+            redirectAttrs.addFlashAttribute("mensaje", "La solicitud se ha guardado correctamente.");
+        } else {
+            redirectAttrs.addFlashAttribute("mensaje", "La solicitud se ha editado correctamente.");
+        }
 
-	        return "redirect:/admin/crud#solicitudes";
-	    }
+        return "redirect:/admin/crud#solicitudes";
+    }
 
-	    @GetMapping("/editar/{id}")
-	    public String editarSolicitud(@PathVariable Integer id, Model model) {
-	        Solicitud solicitud = solicitudService.findById(id);
-	        model.addAttribute("solicitud", solicitud);
-	        model.addAttribute("usuarios", usuarioService.findAll());
+    @GetMapping("/editar/{id}")
+    public String editarSolicitud(@PathVariable Integer id, Model model) {
+        Solicitud solicitud = solicitudService.findById(id);
+        model.addAttribute("solicitud", solicitud);
+        model.addAttribute("usuarios", usuarioService.findAll());
 
-	        List<String> asuntos = List.of("Sugerencia", "Problema", "Pedir cita", "Duda");
-	        model.addAttribute("asuntos", asuntos);
+        List<String> asuntos = List.of("Sugerencia", "Problema", "Pedir cita", "Duda");
+        model.addAttribute("asuntos", asuntos);
 
-	        return "solicitud";
-	    }
+        return "solicitud";
+    }
 
-	    @GetMapping("/eliminar/{id}")
-	    public String eliminarSolicitud(@PathVariable Integer id, RedirectAttributes redirectAttrs) {
-	        solicitudService.deleteById(id);
-	        redirectAttrs.addFlashAttribute("mensaje", "La solicitud se ha eliminado correctamente.");
-	        return "redirect:/admin/crud#solicitudes";
-	    }
+    @GetMapping("/eliminar/{id}")
+    public String eliminarSolicitud(@PathVariable Integer id, RedirectAttributes redirectAttrs) {
+        solicitudService.deleteById(id);
+        redirectAttrs.addFlashAttribute("mensaje", "La solicitud se ha eliminado correctamente.");
+        return "redirect:/admin/crud#solicitudes";
+    }
 
 }

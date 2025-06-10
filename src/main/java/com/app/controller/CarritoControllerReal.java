@@ -1,49 +1,67 @@
 package com.app.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import com.app.model.Carrito;
 import com.app.model.Producto;
 import com.app.model.Usuario;
 import com.app.service.CarritoService;
-import com.app.service.ItemCarritoService;
+import com.app.service.ProductoService;
+import com.app.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
 
 
 @Controller
 @RequestMapping("/carrito")
 public class CarritoControllerReal {
-	
-	@Autowired
-	private CarritoService carritoService;
-	
-	@Autowired
-	private ItemCarritoService itemCarritoService;
-	
-	 // Añade un producto al carrito
-    @PostMapping("/agregar")
-    public ResponseEntity<?> agregarAlCarrito(@RequestBody Integer idProducto) {
-//        Usuario usuario = (Usuario) session.getAttribute("usuario");
-//        if (usuario == null) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Debes iniciar sesión.");
-//        }
-//
-//        List<Producto> carrito = (List<Producto>) session.getAttribute("carrito");
-//        if (carrito == null) {
-//            carrito = new ArrayList<>();
-//        }
-//
-//        carrito.add(producto);
-//        session.setAttribute("carrito", carrito);
 
-        return ResponseEntity.ok("Producto añadido correctamente");
-    }
-	
+	@Autowired
+	ProductoService productoService;
+
+	@Autowired
+	CarritoService carritoService;
+
+	@Autowired
+	UsuarioService usuarioService;
+
+
+	@GetMapping("/")
+	public String mostrarCarrito(Model model, Principal principal){
+
+		Usuario logged = usuarioService.obtenerUsuarioPorNombre(principal.getName()).get();
+		System.out.println("FEO1");
+		Carrito carrito = carritoService.obtenerCarritoPorUsuario(logged);
+//		System.out.println("FEO2" + carrito);
+		model.addAttribute("carrito", carrito);
+		System.out.println("FEO3");
+
+		model.addAttribute("loggedUser", "Usuario: " + principal.getName());
+		return "carrito";
+	}
+
+	@GetMapping("/agregar/{idProducto}")
+	public String agregarProductoAlCarrito(@PathVariable Integer idProducto,Model model){
+
+		Carrito carrito;
+
+		Producto producto = productoService.findById(idProducto);
+
+		carrito = carritoService.agregarAlCarrito(producto);
+
+		model.addAttribute("producto", producto);
+
+
+
+
+
+		return "pieza";
+	}
+
 }

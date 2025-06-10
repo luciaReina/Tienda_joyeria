@@ -16,20 +16,23 @@ const productos = [
 ];
 
 function searchProducts() {
-  const input = document.getElementById("searchInput").value.toLowerCase();
-  const resultados = productos.filter(p => p.nombre.toLowerCase().includes(input));
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const resultados = productos.filter(p => p.nombre.toLowerCase().includes(input));
+      const resultsDiv = document.getElementById("searchResults");
 
-  const resultsDiv = document.getElementById("searchResults");
-  resultsDiv.innerHTML = ''; // Limpiar resultados previos
+      resultsDiv.innerHTML = ''; // Limpiar resultados previos
 
-  if (resultados.length === 0) {
-    resultsDiv.innerHTML = "<p>No se encontraron productos.</p>";
-  } else {
-    resultados.forEach(p => {
-      const div = document.createElement("div");
-      div.classList.add("product");
-      div.innerHTML = `<strong>${p.nombre}</strong>`;
-      resultsDiv.appendChild(div);
-    });
-  }
-}
+      if (resultados.length === 0) {
+        resultsDiv.innerHTML = "<p style='padding:10px;'>No se encontraron productos.</p>";
+      } else {
+        resultados.forEach(p => {
+          const div = document.createElement("div");
+          div.classList.add("product");
+          div.innerHTML = `<strong>${p.nombre}</strong>`;
+          div.addEventListener('click', () => {
+            window.location.href = 'productos.html'; // Redirigir a la página
+          });
+          resultsDiv.appendChild(div);
+        });
+      }
+    }

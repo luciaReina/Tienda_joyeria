@@ -35,7 +35,7 @@
         <a id="iconoUsuario" href="/html/login.html">
             <svg class="icon-user" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></g></svg>
           </a>
-          <a href="/carrito">
+          <a href="/carrito/">
             <svg  class="icon-bag" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M6.45 9.23h11.1a1.85 1.85 0 0 1 1.85 1.85v6.472a3.7 3.7 0 0 1-3.7 3.698H8.3a3.7 3.7 0 0 1-3.7-3.698V11.08a1.85 1.85 0 0 1 1.85-1.85"/><path d="M16.625 11.553V7.381a4.62 4.62 0 0 0-2.852-4.278a4.627 4.627 0 0 0-6.398 4.278v4.172"/></g></svg>
           </a>
      </div>
@@ -75,54 +75,46 @@
 </div>
 
 <section class="atras">
-  <a href="productos.html">
+  <a href="/html/productos.html">
     <h4>← Atrás</h4>
   </a>
 </section>
 
-<div id="productoMovil" class="producto-movil">
+<!-- <div id="productoMovil" class="producto-movil">
     <div class="carrousel">
       <div class="flecha izquierda" onclick="event.stopPropagation()">←</div>
         <img th:src="${product.imagePaths[0]}" alt="foto1">
         <img th:src="${product.imagePaths[1]}" alt="foto2">
       <div class="flecha derecha" onclick="event.stopPropagation()">→</div>
     </div>
-</div>
+</div> -->
 
 <section class="flex-container">
-        <div class="left-side">
-        <section class="grid-container">
-            <div class="item1">
-                <img th:src="/img/anillo.png" alt="photo2">
-            </div>
-            <div class="item2">
-                <img th:src="${product.imagePaths[1]}" alt="photo2">
-            </div>  
-            <div class="item3">
-                <img th:src="${product.imagePaths[2]}" alt="photo2">
-            </div>
-        </section>
+    <div class="left-side">
+    	 <img th:src="@{/img/{img}(img=${producto.imgUrl})}" alt="Imagen del producto" />
     </div>
-  
         <div class="right-side">
-        <h2 th:text="${product.name}">Elegance Earrings</h2>
-        <p class="material" th:text="${product.material}">Plata de primera ley</p>
-        <p th:text="${product.description}">Pendientes de plata de primera ley con un diseño moderno y elegante con detalles florales</p>
-        <p class="precio" th:text="${product.price + '€'}">260€</p>
-        <div class="colores">
-            <span>Color</span>
-            <div class="color_opcion">
-                <span class="color blue"></span>
-                <span class="color green"></span>
-                <span class="color brown"></span>
-            </div>
-        </div>
-        <button th:onclick="'anadirACesta(' + ${product.id} + ')'" class="cesta">AÑADIR A LA CESTA</button>
-        <span th:id="'tick-' + ${product.id}" class="tick" style="display:none;">✔ Añadido</span>
+	        <h2 th:text="${producto.nombre}">Elegance Earrings</h2>
+	        <p class="material" th:text="${producto.estilo}">Plata de primera ley</p>
+	        <p th:text="${producto.descripcion}">Pendientes de plata de primera ley con un diseño moderno y elegante con detalles florales</p>
+	        <p class="precio" th:text="${producto.precio + '€'}">260€</p>
+	        <div class="colores">
+	            <span>Color</span>
+	            <div class="color_opcion">
+	                <span class="color blue"></span>
+	                <span class="color green"></span>
+	                <span class="color brown"></span>
+	            </div>
+        	</div>
+        <a class="cesta" th:href="@{/carrito/agregar/{id}(id=${producto.idProducto})}">
+            AÑADIR A LA CESTA
+        </a>
+        <!-- <button th:onclick="'anadirACesta(' + ${producto.idProducto} + ')'" class="cesta">AÑADIR A LA CESTA</button> -->
+        <span th:id="'tick-' + ${producto.idProducto}" class="tick" style="display:none;">✔ Añadido</span>
     </div>
 </section>
 
-<section class="recomendaciones">
+<!-- <section class="recomendaciones">
       <h3>RELATED PRODUCTS</h3>
       <div class="recomendaciones_grid">
         <div class="cartilla" th:each="relatedProduct : ${relatedProducts}">
@@ -131,7 +123,7 @@
           <p th:text="${relatedProduct.price + '€'}">175€</p>
         </div>
       </div>
-</section>
+</section> -->
 
 <footer class="footer">
   <div class="footer-column">

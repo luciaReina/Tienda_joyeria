@@ -1,54 +1,31 @@
 package com.app.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "CATEGORIA")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = -81984712149714253L;
-
-	private Integer idCategoria;	
-    private String tipo;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_CATEGORIA", nullable = false)
-    public Integer getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Integer idCategoria) {
-        this.idCategoria = idCategoria;
-    }
-
+	private Integer idCategoria;
     @Column(name = "TIPO", nullable = false, length = 255)
-    public String getTipo() {
-        return tipo;
-    }
+    private String tipo;
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idCategoria, tipo);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Categoria)) return false;
-        Categoria other = (Categoria) obj;
-        return Objects.equals(idCategoria, other.idCategoria);
-    }
 }

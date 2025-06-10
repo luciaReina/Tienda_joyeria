@@ -154,6 +154,9 @@
                 <select th:field="*{categoria}">
                     <option th:each="cat : ${categorias}" th:value="${cat.idCategoria}" th:text="${cat.tipo}"></option>
                 </select>
+                
+                <label>Imagen:</label>
+                <input type="text" th:field="*{imgUrl}" required />
 
                 <div class="form-buttons">
                     <button type="submit" class="btn btn-primary">Guardar</button>

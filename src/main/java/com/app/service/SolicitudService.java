@@ -2,6 +2,7 @@ package com.app.service;
 
 import java.util.List;
 
+import com.app.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class SolicitudService {
     }
     
 	public void save(Solicitud solicitud) {
+		System.out.println(solicitud.getFechaSolicitud());
 		solicitudRepository.save(solicitud);
 	}
 
@@ -33,3 +35,4 @@ public class SolicitudService {
 	}
 
 }
+

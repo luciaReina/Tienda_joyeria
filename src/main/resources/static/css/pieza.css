@@ -172,48 +172,38 @@ nav.menu-nav a:hover {
 /* Producto detallado */
 .flex-container {
   display: flex;
-  justify-content: space-between;
-  gap: 30px; /* Espacio entre la columna de imágenes y la columna de texto */
+  align-items: center; /* Centrado vertical */
+  gap: 60px;
+  padding: 40px 80px;
   margin-top: 10px;
   margin-bottom: 80px;
 }
 
-/* Lado izquierdo: Grid de imágenes */
 .left-side {
-  flex: 2; /* Reducir el tamaño del lado izquierdo para que ocupe menos espacio */
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;  /* Dos columnas con igual tamaño */
-  gap: 10px; /* Ajustar el espacio entre las imágenes */
-  padding: 25px; /* Reducir padding para un grid más compacto */
-}
-
-.grid-container img {
+.left-side img {
+  width: 360px;       /* Aumentado desde 300px */
+  height: 360px;      /* Aumentado desde 300px */
   object-fit: cover;
-  height: 270px; /* Reducir la altura de las imágenes */
-  width: 100%;
-  cursor: pointer;
+  border-radius: 8px;
 }
 
-.item1 {
-  grid-row-start: 1;
-  grid-row-end: 3;
-}
-
-.item1 img {
-  height: 100%;
-}
-
-/* Lado derecho: Información del producto */
 .right-side {
   flex: 1;
-  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* Centra verticalmente el contenido */
+  gap: 12px;
   font-family: 'Segoe UI', sans-serif;
-  color: #2c1e3f; 
+  color: #2c1e3f;
+  height: 360px; 
 }
+
  
 .titulo {
   font-size: 24px;

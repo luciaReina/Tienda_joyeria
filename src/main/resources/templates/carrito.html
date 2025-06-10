@@ -4,41 +4,98 @@
     <meta charset="UTF-8">
     <title>Cesta de la compra</title>
     <link rel="stylesheet" th:href="@{/css/carrito.css}">
-</head>
+    <script>
+        // Función para decrementar la cantidad de un producto
+        function decrementar(productoId) {
+            // Implementa aquí la lógica para enviar una petición a tu backend
+            // para decrementar la cantidad del producto con productoId
+            // Por ejemplo, usando fetch API:
+            // fetch('/carrito/decrementar/' + productoId, { method: 'POST' })
+            // .then(response => { if(response.ok) window.location.reload(); })
+            // .catch(error => console.error('Error:', error));
+            alert('Decrementar producto ID: ' + productoId); // Placeholder
+        }
+
+        // Función para incrementar la cantidad de un producto
+        function incrementar(productoId) {
+            // Implementa aquí la lógica para enviar una petición a tu backend
+            // para incrementar la cantidad del producto con productoId
+            // Por ejemplo, usando fetch API:
+            // fetch('/carrito/incrementar/' + productoId, { method: 'POST' })
+            // .then(response => { if(response.ok) window.location.reload(); })
+            // .catch(error => console.error('Error:', error));
+            alert('Incrementar producto ID: ' + productoId); // Placeholder
+        }
+
+        // Para borrar un item del carrito (ejemplo, si tienes un botón de borrar)
+        function eliminarItem(itemId) {
+            if (confirm('¿Estás seguro de que quieres eliminar este artículo del carrito?')) {
+                // Aquí necesitarías el token CSRF si Spring Security está habilitado
+                const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+                const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+                fetch('/carrito/eliminar/' + itemId, { // Asume un endpoint /carrito/eliminar/{idItemCarrito}
+                    method: 'POST', // O 'DELETE' con HiddenHttpMethodFilter si prefieres
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded', // O 'application/json' si envías JSON
+                        [csrfHeader]: csrfToken // Añadir el token CSRF
+                    },
+                    body: '_method=DELETE' // Si usas HiddenHttpMethodFilter para simular DELETE
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.reload(); // Recarga la página para ver los cambios
+                    } else {
+                        response.text().then(text => alert('Error al eliminar el artículo: ' + text));
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        }
+    </script>
+    </head>
 <body>
 <div class="carrito-container">
-    <h2>IVI REINA</h2>
-    <div class="progreso">
-        <span class="activo">Cesta</span> → <span>Envío & pago</span> → <span>Confirmación</span>
-    </div>
+    <header class="cabecera">
+        <h2>IVI REINA</h2>
+        <div class="progreso">
+            <span class="activo">Cesta</span> → <span>Envío & pago</span> → <span>Confirmación</span>
+        </div>
+    </header>
+    
+     <h3 th:text="'Bienvenido, ' + ${loggedUser}"></h3>
 
-    <div th:if="${carrito == null or #lists.isEmpty(carrito)}" class="carrito-vacio">
+    <div th:if="${carrito == null or #lists.isEmpty(carrito.itemsCarrito)}" class="carrito-vacio">
         Tu cesta de la compra está vacía.
     </div>
 
-    <div th:if="${carrito != null and !#lists.isEmpty(carrito)}" class="carrito-contenido">
-        <div class="item" th:each="producto : ${carrito}">
-            <img th:src="@{/images/{img}(img=${producto.imagen})}" alt="Producto"/>
+    <div th:if="${carrito != null and !#lists.isEmpty(carrito.itemsCarrito)}" class="carrito-contenido">
+        <div class="item" th:each="item : ${carrito.itemsCarrito}">
+            <img th:src="@{/img/{img}(img=${item.producto.imgUrl})}" alt="Producto" />
             <div>
-                <h3 th:text="${producto.nombre}"></h3>
-                <p>Ref: <span th:text="${producto.referencia}"></span></p>
-                <p><strong th:text="${producto.precio + '€'}"></strong></p>
+                <h3 th:text="${item.producto.nombre}"></h3>
+                <p>Ref: <span th:text="${item.producto.descripcion}"></span></p>
+                <p>Precio Unitario: <strong th:text="${#numbers.formatDecimal(item.producto.precio, 0, 'POINT', 2, 'POINT')} + '€'"></strong></p>
+                <p>Subtotal Item: <strong th:text="${#numbers.formatDecimal(item.subTotal, 0, 'POINT', 2, 'POINT')} + '€'"></strong></p>
                 <div class="cantidad">
-                    <button th:onclick="'decrementar(' + ${producto.id} + ')'">-</button>
-                    <span>1</span>
-                    <button th:onclick="'incrementar(' + ${producto.id} + ')'">+</button>
+                    <button type="button" th:onclick="'decrementar(' + ${item.producto.idProducto} + ')'">-</button>
+                    <span th:text="${item.cantidad}">1</span>
+                    <button type="button" th:onclick="'incrementar(' + ${item.producto.idProducto} + ')'">+</button>
+                    <button type="button" class="btn btn-danger" th:onclick="'eliminarItem(' + ${item.idItemCarrito} + ')'">Eliminar</button>
                 </div>
             </div>
         </div>
 
         <div class="totales">
-            <p>SUBTOTAL: 
-                <span th:text="${#numbers.formatDecimal(carrito.?sum(p -> p.precio), 1, 'POINT', 2, 'POINT')} + '€'"></span>
+            <p>SUBTOTAL:
+                <span th:text="${#numbers.formatDecimal(carrito.subTotal, 0, 'POINT', 2, 'POINT')} + '€'"></span>
             </p>
-            <p>GASTOS DE ENVÍO: <span>3.99€</span></p>
+            <p>GASTOS DE ENVÍO:
+                <span th:text="${#numbers.formatDecimal(carrito.gastosEnvio, 0, 'POINT', 2, 'POINT')} + '€'"></span>
+            </p>
             <p><strong>
-                TOTAL: 
-                <span th:text="${#numbers.formatDecimal(carrito.?sum(p -> p.precio) + 3.99, 1, 'POINT', 2, 'POINT')} + '€'"></span>
+                TOTAL:
+                <span th:text="${#numbers.formatDecimal(carrito.total, 0, 'POINT', 2, 'POINT')} + '€'"></span>
             </strong></p>
         </div>
 

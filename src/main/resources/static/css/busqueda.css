@@ -161,6 +161,9 @@ nav.menu-nav a:hover {
   align-items: center;
   margin: 40px auto;
   max-width: 84%;
+  position: relative;  
+  flex-wrap: wrap;    
+  z-index:0;
 }
 
 .search-input {
@@ -172,6 +175,18 @@ nav.menu-nav a:hover {
   color: #3c225d;
   outline: none;
   font-family: 'Georgia', serif;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 999;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-family: 'Georgia', serif;
+  color: #3c225d;
 }
 
 .search-button {
@@ -186,6 +201,15 @@ nav.menu-nav a:hover {
 
 .search-button:hover {
   background-color: #2E0E46;
+}
+
+.product {
+  padding: 10px 16px;
+   cursor: pointer;
+}
+
+.product:hover {
+  background-color: #f3f3f3;
 }
 
 .icon-lupa {
@@ -211,6 +235,7 @@ nav.menu-nav a:hover {
   cursor: pointer;
   color: #2E0E46;
 }
+
 
 /* Título */
 .cuerpo2  {

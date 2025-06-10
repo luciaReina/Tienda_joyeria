@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.app.model.Producto;
 import com.app.service.CategoriaService;
 import com.app.service.ProductoService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin/productos")
@@ -58,6 +62,26 @@ public class ProductoController {
         productoService.deleteById(id);
         redirectAttrs.addFlashAttribute("mensaje", "El producto se ha eliminado correctamente.");
         return "redirect:/admin/crud#productos";
+    }
+
+    @GetMapping("/productos/{idProducto}")
+    public String obtenerUnProducto(@PathVariable Integer idProducto, Model model){
+        model.addAttribute("producto",productoService.findById(idProducto));
+        return "pieza";
+    }
+//    @GetMapping("/productos/{idProducto}")
+//    public ResponseEntity<Producto> obtenerUnProducto(@PathVariable Integer idProducto){
+//        return ResponseEntity.ok(productoService.findById(idProducto));
+//    }
+
+    @GetMapping("/productos")
+    public ResponseEntity<?> obtenerProductos (){
+
+        List <Producto> productos = new ArrayList<>();
+
+        productos = productoService.findAll();
+
+        return ResponseEntity.ok(productos);
     }
     
 }

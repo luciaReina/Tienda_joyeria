@@ -159,21 +159,28 @@ nav.menu-nav a:hover {
 
 /*del perfil*/
 .perfil-container {
-    display: flex;
-    max-width: 1000px;
-    margin: 40px auto;
-    background-color: #fff;
-    border: 1px solid #eae6df;
-    margin-top: 250px;
+  display: flex;
+  max-width: 1000px;
+  margin: 40px auto;
+  background-color: #fff;
+  border: 1px solid #eae6df;
+  margin-top: 250px;
 }
  
 .menu-perfil {
-    width: 250px;
-    background-color: white;
-    padding: 40px 30px;
-    border-right: 1px solid #e0dcd4;
+  width: 250px;
+  background-color: white;
+  padding: 30px 30px 30px 30px;
+  border-right: 1px solid #e0dcd4;
 }
  
+.menu-perfil h2 {
+  font-size: 24px;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  color: #2d043b;
+}
+
 .menu-perfil ul {
     list-style: none;
     padding: 0;
@@ -185,6 +192,8 @@ nav.menu-nav a:hover {
     font-size: 20px;
     color: #673c91;
     cursor: pointer;
+    transition: color 0.3s;
+    font-weight: normal;
 }
  
 .menu-perfil ul li a {
@@ -195,12 +204,21 @@ nav.menu-nav a:hover {
  
 .menu-perfil ul li:hover,
 .menu-perfil ul li a:hover {
+    color:#2E0E46;
     text-decoration: underline;
 }
- 
-.menu-perfil ul li:nth-child(2) {
-    font-weight: bold;
-    color: #2d043b;
+
+/* Línea separadora entre "Pagos" y "Cerrar sesión" */
+.menu-perfil ul li:nth-child(3) {
+  position: relative;
+}
+
+.menu-perfil ul li:nth-child(3)::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background-color: #e0dcd4;
+  margin-top: 20px;
 }
  
 .contenido {
