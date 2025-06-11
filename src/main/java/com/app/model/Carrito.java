@@ -49,7 +49,7 @@ public class Carrito implements Serializable{
 
 	public void addItemCarrito(ItemCarrito item) {
 		this.itemsCarrito.add(item);
-		item.setCarrito(this); // ¡CRUCIAL para la bidireccionalidad!
+		item.setCarrito(this); // 
 	}
 
 	public void removeItemCarrito(ItemCarrito item) {

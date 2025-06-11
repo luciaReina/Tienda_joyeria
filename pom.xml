@@ -81,6 +81,11 @@
             <artifactId>spring-security-core</artifactId>
         </dependency>
         <dependency>
+		    <groupId>com.paypal.sdk</groupId>
+		    <artifactId>checkout-sdk</artifactId>
+		    <version>1.0.3</version>
+		</dependency>
+        <dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.38</version>

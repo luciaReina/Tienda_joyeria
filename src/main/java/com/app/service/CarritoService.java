@@ -1,25 +1,21 @@
 package com.app.service;
 
-import java.math.BigDecimal;
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-import com.app.model.Carrito;
-import com.app.model.ItemCarrito;
-
-import com.app.model.Usuario;
-import com.app.repository.UsuarioRepository;
-import jakarta.annotation.PostConstruct;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
+import com.app.model.Carrito;
+import com.app.model.ItemCarrito;
 import com.app.model.Producto;
+import com.app.model.Usuario;
 import com.app.repository.CarritoRepository;
+import com.app.repository.UsuarioRepository;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 
 @Service
 @SessionScope
@@ -66,14 +62,14 @@ public class CarritoService {
                     .cantidad(1)
                     // subTotal se calculará automáticamente en @PrePersist/@PreUpdate del ItemCarrito
                     .build();
-            carritoSesion.addItemCarrito(newItem); // Añadir al carrito y establecer la bidireccionalidad
+            carritoSesion.addItemCarrito(newItem); 
         }
 
 
 
         // Persistir el carrito en la base de datos
-        // Si el carrito es nuevo, lo guarda. Si ya tiene un ID, lo actualiza.
-        // Gracias a CascadeType.ALL, los ItemCarrito nuevos se persistirán
+        // Si el carrito es nuevo, lo guarda. Si ya tiene un ID, lo actualiza
+        // CascadeType.ALL, los ItemCarrito nuevos se persistirán
         // y los existentes (que se modificaron) se actualizarán.
         this.carritoSesion = carritoRepository.save(carritoSesion);
         // Recalcular los totales del carrito después de modificar los items
@@ -102,15 +98,64 @@ public class CarritoService {
      */
     public Carrito getCarritoSesion() {
         if (this.carritoSesion == null) {
-            // Esto no debería ocurrir si @PostConstruct funciona, pero es una buena práctica defensiva.
+            // Esto no debería ocurrir si @PostConstruct funciona, pero es una buena práctica
             this.carritoSesion = new Carrito();
         }
         return this.carritoSesion;
     }
+    
+//    @Transactional
+//    public void incrementarCantidad(Integer idProducto, Usuario usuario) {
+//        Carrito carrito = obtenerCarritoPorUsuario(usuario);
+//        if (carrito == null) {
+//            carrito = new Carrito();
+//            carrito.setUsuario(usuario);
+//        }
+//
+//        carrito.getItemsCarrito().stream()
+//            .filter(item -> item.getProducto().getIdProducto().equals(idProducto))
+//            .findFirst()
+//            .ifPresent(item -> {
+//                item.setCantidad(item.getCantidad() + 1);
+//                item.calculateSubTotal();
+//            });
+//
+//        carrito.calcularTotales();
+//        carritoRepository.save(carrito);
+//    }
+//
+//    @Transactional
+//    public void decrementarCantidad(Integer idProducto, Usuario usuario) {
+//        Carrito carrito = obtenerCarritoPorUsuario(usuario);
+//        if (carrito == null) return;
+//
+//        carrito.getItemsCarrito().stream()
+//            .filter(item -> item.getProducto().getIdProducto().equals(idProducto))
+//            .findFirst()
+//            .ifPresent(item -> {
+//                int nuevaCantidad = item.getCantidad() - 1;
+//                if (nuevaCantidad > 0) {
+//                    item.setCantidad(nuevaCantidad);
+//                    item.calculateSubTotal();
+//                } else {
+//                    // Si la cantidad llega a cero o menos, eliminar el item del carrito
+//                    carrito.getItemsCarrito().remove(item);
+//                }
+//            });
+//
+//        carrito.calcularTotales();
+//        carritoRepository.save(carrito);
+//    }
+//
+//    @Transactional
+//    public void eliminarProducto(Integer idProducto, Usuario usuario) {
+//        Carrito carrito = obtenerCarritoPorUsuario(usuario);
+//        if (carrito == null) return;
+//
+//        carrito.getItemsCarrito().removeIf(item -> item.getProducto().getIdProducto().equals(idProducto));
+//
+//        carrito.calcularTotales();
+//        carritoRepository.save(carrito);
+//    }
 
-    // Puedes agregar más métodos, por ejemplo:
-    // - removerDelCarrito(Producto producto)
-    // - actualizarCantidad(Producto producto, int nuevaCantidad)
-    // - vaciarCarrito()
-    // - finalizarCompra() -> donde se limpia la sesión y el carrito podría marcarse como "comprado"
 }
