@@ -80,18 +80,26 @@
   </a>
 </section>
 
-<!-- <div id="productoMovil" class="producto-movil">
-    <div class="carrousel">
-      <div class="flecha izquierda" onclick="event.stopPropagation()">←</div>
-        <img th:src="${product.imagePaths[0]}" alt="foto1">
-        <img th:src="${product.imagePaths[1]}" alt="foto2">
-      <div class="flecha derecha" onclick="event.stopPropagation()">→</div>
-    </div>
-</div> -->
+<!-- producto en movil -->
+<div class="producto-movil">
+	<img th:src="@{/img/{img}(img=${producto.imgUrl})}" alt="Imagen del producto" />
+</div>
 
+<!-- Contenedor principal -->
 <section class="flex-container">
+    <!-- Lado izquierdo: Grid de imágenes -->
     <div class="left-side">
-    	 <img th:src="@{/img/{img}(img=${producto.imgUrl})}" alt="Imagen del producto" />
+        <section class="grid-container">
+            <div class="item1">
+                <img th:src="@{/img/modelo.jpg}" alt="photo2">
+            </div>
+            <div class="item2">
+                 <img th:src="@{/img/{img}(img=${producto.imgUrl})}" alt="Imagen del producto" />
+            </div>  
+            <div class="item3">
+                <img th:src="@{/img/cat1.png}" alt="photo2">
+            </div>
+        </section>
     </div>
         <div class="right-side">
 	        <h2 th:text="${producto.nombre}">Elegance Earrings</h2>
@@ -106,24 +114,41 @@
 	                <span class="color brown"></span>
 	            </div>
         	</div>
-        <a class="cesta" th:href="@{/carrito/agregar/{id}(id=${producto.idProducto})}">
-            AÑADIR A LA CESTA
-        </a>
-        <!-- <button th:onclick="'anadirACesta(' + ${producto.idProducto} + ')'" class="cesta">AÑADIR A LA CESTA</button> -->
-        <span th:id="'tick-' + ${producto.idProducto}" class="tick" style="display:none;">✔ Añadido</span>
-    </div>
+	        <a class="cesta" th:href="@{/carrito/agregar/{id}(id=${producto.idProducto})}">
+	            AÑADIR A LA CESTA
+	        </a>
+	        <!-- <button th:onclick="'anadirACesta(' + ${producto.idProducto} + ')'" class="cesta">AÑADIR A LA CESTA</button> -->
+	        <span th:id="'tick-' + ${producto.idProducto}" class="tick" style="display:none;">✔ Añadido</span>
+	    </div>
 </section>
 
-<!-- <section class="recomendaciones">
-      <h3>RELATED PRODUCTS</h3>
-      <div class="recomendaciones_grid">
-        <div class="cartilla" th:each="relatedProduct : ${relatedProducts}">
-          <img th:src="${relatedProduct.imagePath}" th:alt="${relatedProduct.name}">
-          <h4 th:text="${relatedProduct.name}">Silver Earrings</h4>
-          <p th:text="${relatedProduct.price + '€'}">175€</p>
+
+<!-- Productos -->
+<section class="recomendaciones">
+    <h3>RELATED PRODUCTS</h3>
+    <div class="recomendaciones_grid">
+        <div class="cartilla">
+            <img th:src="@{/img/collares.png}" alt="Silver necklace">
+            <h4>Silver necklace</h4>
+            <p>175€</p>
         </div>
-      </div>
-</section> -->
+        <div class="cartilla">
+            <img th:src="@{/img/plata2.jpg}" alt="Silver Earrings">
+            <h4>High quality Earrings</h4>
+            <p>175€</p>
+        </div>
+        <div class="cartilla">
+            <img th:src="@{/img/anillo.png}" alt="Silver Ring">
+            <h4>Silver Ring</h4>
+            <p>175€</p>
+        </div>
+        <div class="cartilla">
+            <img th:src="@{/img/pendientes.png}" alt="Silver Earrings">
+            <h4>Silver Earrings</h4>
+            <p>175€</p>
+        </div>
+    </div>
+</section>
 
 <footer class="footer">
   <div class="footer-column">

@@ -59,14 +59,14 @@
     <header class="cabecera">
         <h2>IVI REINA</h2>
         <div class="progreso">
-            <span class="activo">Cesta</span> → <span>Envío & pago</span> → <span>Confirmación</span>
+            <span class="activo">Cart</span> → <span>Shipping & Payment</span> → <span>Confirmation</span>
         </div>
     </header>
     
-     <h3 th:text="'Bienvenido, ' + ${loggedUser}"></h3>
+     <h3 th:text="'Welcome, ' + ${loggedUser}"></h3>
 
     <div th:if="${carrito == null or #lists.isEmpty(carrito.itemsCarrito)}" class="carrito-vacio">
-        Tu cesta de la compra está vacía.
+        Your shopping cart is empty.
     </div>
 
     <div th:if="${carrito != null and !#lists.isEmpty(carrito.itemsCarrito)}" class="carrito-contenido">
@@ -75,8 +75,8 @@
             <div>
                 <h3 th:text="${item.producto.nombre}"></h3>
                 <p>Ref: <span th:text="${item.producto.descripcion}"></span></p>
-                <p>Precio Unitario: <strong th:text="${#numbers.formatDecimal(item.producto.precio, 0, 'POINT', 2, 'POINT')} + '€'"></strong></p>
-                <p>Subtotal Item: <strong th:text="${#numbers.formatDecimal(item.subTotal, 0, 'POINT', 2, 'POINT')} + '€'"></strong></p>
+                <p>Unit Price: <strong th:text="${#numbers.formatDecimal(item.producto.precio, 0, 'POINT', 2, 'POINT')} + '€'"></strong></p>
+                <p>Item Subtotal: <strong th:text="${#numbers.formatDecimal(item.subTotal, 0, 'POINT', 2, 'POINT')} + '€'"></strong></p>
                 <div class="cantidad">
                     <button type="button" th:onclick="'decrementar(' + ${item.producto.idProducto} + ')'">-</button>
                     <span th:text="${item.cantidad}">1</span>
@@ -90,7 +90,7 @@
             <p>SUBTOTAL:
                 <span th:text="${#numbers.formatDecimal(carrito.subTotal, 0, 'POINT', 2, 'POINT')} + '€'"></span>
             </p>
-            <p>GASTOS DE ENVÍO:
+            <p>SHIPPING COSTS:
                 <span th:text="${#numbers.formatDecimal(carrito.gastosEnvio, 0, 'POINT', 2, 'POINT')} + '€'"></span>
             </p>
             <p><strong>
@@ -100,7 +100,7 @@
         </div>
 
         <form method="post" th:action="@{/realizar-pedido}">
-            <button type="submit">REALIZAR PEDIDO</button>
+            <button type="submit">PLACE ORDER</button>
         </form>
     </div>
 </div>

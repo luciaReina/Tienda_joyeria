@@ -159,7 +159,7 @@ body {
 
 /*Portada*/    
 .portada {
-  background-image: url('taller.webp');
+  background-image: url('/img/taller.webp');
   background-position: center;
   background-size: cover;
   padding: 230px 20px;
@@ -185,6 +185,7 @@ body {
   margin-top: 100px;
   color: black;
   flex-wrap: wrap;
+  margin-bottom: 80px;
 }
 
 .grid-container2 {
@@ -219,6 +220,11 @@ body {
 
 .boton2:hover {
   color:#DDB440; 
+}
+
+.grid-terciario p {
+  padding: 0 20px; 
+  line-height: 1.6; 
 }
 
 /*PIE DE PAGINA*/
@@ -351,9 +357,21 @@ body {
     gap: 40px;
   }
 
-  .grid-container {
-    grid-template-columns: 1fr;
-    padding: 0 8px; 
+  .grid-container2 {
+    display: grid;
+    grid-template-columns: 1fr; /* una columna */
+    grid-template-rows: auto auto; /* dos filas */
+    grid-template-areas:
+      "foto"
+      "texto";
+  }
+
+  .grid-secundario {
+    grid-area: foto;
+  }
+
+  .grid-terciario {
+    grid-area: texto;
   }
 
 }
@@ -379,9 +397,21 @@ body {
     gap: 40px;
   }
 
-  .grid-container {
-    grid-template-columns: 1fr;
-    padding: 0 8px; 
+  .grid-container2 {
+    display: grid;
+    grid-template-columns: 1fr; /* una columna */
+    grid-template-rows: auto auto; /* dos filas */
+    grid-template-areas:
+      "foto"
+      "texto";
+  }
+
+  .grid-secundario {
+    grid-area: foto;
+  }
+
+  .grid-terciario {
+    grid-area: texto;
   }
 
 }

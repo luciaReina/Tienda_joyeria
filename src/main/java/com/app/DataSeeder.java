@@ -81,16 +81,16 @@ public class DataSeeder {
         	if (categoriaRepo.count() == 0) {
 
                 Categoria c1 = new Categoria();
-                c1.setTipo("anillos");
+                c1.setTipo("rings");
 
                 Categoria c2 = new Categoria();
-                c2.setTipo("pendientes");
+                c2.setTipo("earrings");
 
                 Categoria c3 = new Categoria();
-                c3.setTipo("collares");
+                c3.setTipo("necklaces");
 
                 Categoria c4 = new Categoria();
-                c4.setTipo("brazaletes");
+                c4.setTipo("bracelets");
 
                 categoriaRepo.save(c1);
                 categoriaRepo.save(c2);
@@ -103,58 +103,64 @@ public class DataSeeder {
         	// Ahora insertamos productos solo si no hay productos
             if (productoRepo.count() == 0) {
                 // Traemos las categorías (puede ser por tipo, o si tienes IDs)
-            	Categoria anillos = categoriaRepo.findByTipo("anillos").orElseThrow(() -> new RuntimeException("Categoría 'anillos' no encontrada"));
-            	Categoria pendientes = categoriaRepo.findByTipo("pendientes").orElseThrow(() -> new RuntimeException("Categoría 'pendientes' no encontrada"));
-            	Categoria collares = categoriaRepo.findByTipo("collares").orElseThrow(() -> new RuntimeException("Categoría 'collares' no encontrada"));
-                Categoria brazaletes = categoriaRepo.findByTipo("brazaletes").orElseThrow(() -> new RuntimeException("Categoría 'brazaletes' no encontrada"));
+            	Categoria rings = categoriaRepo.findByTipo("rings").orElseThrow(() -> new RuntimeException("Categoría 'anillos' no encontrada"));
+            	Categoria earrings = categoriaRepo.findByTipo("earrings").orElseThrow(() -> new RuntimeException("Categoría 'pendientes' no encontrada"));
+            	Categoria necklaces = categoriaRepo.findByTipo("necklaces").orElseThrow(() -> new RuntimeException("Categoría 'collares' no encontrada"));
+                Categoria bracelets = categoriaRepo.findByTipo("bracelets").orElseThrow(() -> new RuntimeException("Categoría 'brazaletes' no encontrada"));
 
                 Producto p1 = new Producto();
-                p1.setNombre("Anillo de plata");
-                p1.setDescripcion("Anillo hecho de plata pura con diseño elegante.");
+                p1.setNombre("Gold Ring");
+                p1.setDescripcion("Pure silver ring with elegant design.");
                 p1.setPrecio(50.0);
                 p1.setStock(10);
-                p1.setCategoria(anillos);
-                p1.setEstilo("Oro");
+                p1.setCategoria(rings);
+                p1.setEstilo("Gold");
+                p1.setImgUrl("cat2.png");
 
                 Producto p2 = new Producto();
-                p2.setNombre("Pendientes de oro");
-                p2.setDescripcion("Pendientes de oro amarillo, ideales para ocasiones especiales.");
+                p2.setNombre("Gold Earrings");
+                p2.setDescripcion("Gold earrings with blue pearls");
                 p2.setPrecio(80.0);
                 p2.setStock(15);
-                p2.setCategoria(pendientes);
-                p2.setEstilo("Azul");
+                p2.setCategoria(earrings);
+                p2.setEstilo("Blue");
+                p2.setImgUrl("cat1.png");
 
                 Producto p3 = new Producto();
-                p3.setNombre("Collar de perlas");
-                p3.setDescripcion("Collar elegante de perlas blancas naturales.");
+                p3.setNombre("Pearl Necklace");
+                p3.setDescripcion("Elegant necklace with natural green pearls.");
                 p3.setPrecio(120.0);
                 p3.setStock(5);
-                p3.setCategoria(collares);
-                p3.setEstilo("Plata");
+                p3.setCategoria(necklaces);
+                p3.setEstilo("Silver");
+                p3.setImgUrl("cat4.png");
 
                 Producto p4 = new Producto();
-                p4.setNombre("Brazalete Encantado");
-                p4.setDescripcion("Tiene Poderes Mágicos.");
+                p4.setNombre("Blue Bracelet");
+                p4.setDescripcion("Bracelet with blue pearls");
                 p4.setPrecio(420.0);
                 p4.setStock(12);
-                p4.setCategoria(brazaletes);
-                p4.setEstilo("Arcano");
+                p4.setCategoria(bracelets);
+                p4.setEstilo("Blue");
+                p4.setImgUrl("cat3.png");
 
                 Producto p5 = new Producto();
-                p5.setNombre("Brazalete Maldito");
-                p5.setDescripcion("Tiene una maldición.");
-                p5.setPrecio(1.0);
+                p5.setNombre("Diamond Earrings");
+                p5.setDescripcion("4k diamond earrings");
+                p5.setPrecio(1000.0);
                 p5.setStock(2);
-                p5.setCategoria(brazaletes);
-                p5.setEstilo("Arcano");
+                p5.setCategoria(earrings);
+                p5.setEstilo("Diamond");
+                p5.setImgUrl("pendientes.png");
 
                 Producto p6 = new Producto();
-                p6.setNombre("Brazalete de Cuero");
-                p6.setDescripcion("Hecho artesanalmente de cuero.");
-                p6.setPrecio(10.0);
+                p6.setNombre("Silver Bracelet with Blue Pearls");
+                p6.setDescripcion("Silver bracelet with bluish design");
+                p6.setPrecio(500.0);
                 p6.setStock(100);
-                p6.setCategoria(brazaletes);
-                p6.setEstilo("Cuero");
+                p6.setCategoria(bracelets);
+                p6.setEstilo("Silver");
+                p6.setImgUrl("pulsera.png");
 
                 productoRepo.save(p1);
                 productoRepo.save(p2);
